@@ -3,13 +3,16 @@ plugins {
     id 'maven-publish'
 }
 
+group = 'com.github.vimafe82'
+version = '1.0'
+
 android {
     namespace 'com.e510.incidencelibrary'
-    compileSdk 33
+    compileSdkVersion 33
 
     defaultConfig {
-        minSdk 24
-        targetSdk 33
+        minSdkVersion 24
+        targetSdkVersion 33
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -27,21 +30,6 @@ android {
     }
 }
 
-// Because the components are created only during the afterEvaluate phase, you must
-// configure your publications using the afterEvaluate() lifecycle method.
-afterEvaluate {
-    publishing {
-        publications {
-            release(MavenPublication) {
-                // from components.release
-                groupId = 'com.my.group'
-                artifactId = 'id'
-                version = "0.0.1"
-            }
-        }
-    }
-}
-
 dependencies {
 
     implementation 'androidx.appcompat:appcompat:1.6.1'
@@ -49,4 +37,19 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+}
+
+// Because the components are created only during the afterEvaluate phase, you must
+// configure your publications using the afterEvaluate() lifecycle method.
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+                groupId = 'com.github.vimafe82'
+                artifactId = 'IncidenceLibraryAndroid'
+                version = "0.0.1"
+            }
+        }
+    }
 }
