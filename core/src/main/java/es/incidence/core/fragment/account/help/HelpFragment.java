@@ -12,19 +12,14 @@ import android.widget.RelativeLayout;
 import androidx.annotation.Nullable;
 
 import com.e510.commons.utils.ShareUtils;
-import com.e510.commons.utils.StringUtils;
 import com.e510.commons.utils.Utils;
-import com.google.android.youtube.player.YouTubeStandalonePlayer;
 
 import java.util.ArrayList;
 
-import es.incidence.core.BuildConfig;
 import es.incidence.core.Constants;
 import es.incidence.core.Core;
 import es.incidence.core.R;
 import es.incidence.core.activity.FullscreenYoutubeActivity;
-import es.incidence.core.activity.SimpleYoutubeActivity;
-import es.incidence.core.activity.YoutubeActivity;
 import es.incidence.core.adapter.ListAdapter;
 import es.incidence.core.domain.TutorialVideo;
 import es.incidence.core.entity.ListItem;

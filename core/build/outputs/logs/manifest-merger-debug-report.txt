@@ -1,11 +1,11 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:1:1-167:12
-INJECTED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:1:1-167:12
-INJECTED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:1:1-167:12
+ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:1:1-159:12
+INJECTED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:1:1-159:12
+INJECTED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:1:1-159:12
 	package
 		INJECTED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml
-		ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:1:1-167:12
+		ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:1:1-159:12
 		INJECTED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml
 	xmlns:android
 		ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:1:11-69
@@ -122,7 +122,7 @@ ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_fr
 	android:name
 		ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:48:9-47
 application
-ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:51:5-164:19
+ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:51:5-156:19
 	android:supportsRtl
 		ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:53:9-35
 	android:hardwareAccelerated
@@ -193,108 +193,94 @@ ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_fr
 		ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:81:13-44
 	android:name
 		ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:80:19-56
-activity#es.incidence.core.activity.YoutubeActivity
-ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:87:9-94:20
-	android:screenOrientation
-		ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:92:13-49
-	android:windowSoftInputMode
-		ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:90:13-64
-	android:exported
-		ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:93:13-37
-	android:configChanges
-		ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:91:13-87
-	android:theme
-		ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:89:13-44
-	android:name
-		ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:88:13-53
 activity#es.incidence.core.activity.SimpleYoutubeActivity
-ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:96:9-99:47
+ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:88:9-91:47
 	android:exported
-		ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:98:13-37
+		ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:90:13-37
 	android:theme
-		ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:99:13-44
+		ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:91:13-44
 	android:name
-		ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:97:13-59
+		ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:89:13-59
 activity#es.incidence.core.activity.FullscreenYoutubeActivity
-ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:101:9-104:47
+ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:93:9-96:47
 	android:exported
-		ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:103:13-37
+		ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:95:13-37
 	android:theme
-		ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:104:13-44
+		ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:96:13-44
 	android:name
-		ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:102:13-63
+		ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:94:13-63
 service#es.incidence.core.manager.beacon.BeaconService
-ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:106:9-109:47
+ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:98:9-101:47
 	android:enabled
-		ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:108:13-35
+		ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:100:13-35
 	android:exported
-		ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:109:13-36
+		ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:101:13-36
 	android:foregroundServiceType
-		ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:107:75-115
+		ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:99:75-115
 	android:name
-		ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:107:13-74
+		ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:99:13-74
 receiver#es.incidence.core.manager.beacon.RestartReceiver
-ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:111:9-130:20
+ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:103:9-122:20
 	android:enabled
-		ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:112:13-35
+		ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:104:13-35
 	android:exported
-		ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:113:13-36
+		ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:105:13-36
 	android:name
-		ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:111:19-82
+		ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:103:19-82
 intent-filter#action:name:android.intent.action.PACKAGE_REPLACED+data:scheme:es.incidence.core
-ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:114:13-117:29
+ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:106:13-109:29
 action#android.intent.action.PACKAGE_REPLACED
-ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:115:17-81
+ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:107:17-81
 	android:name
-		ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:115:25-78
+		ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:107:25-78
 data
-ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:116:17-59
+ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:108:17-59
 	android:scheme
-		ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:116:23-57
+		ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:108:23-57
 intent-filter#action:name:android.intent.action.MY_PACKAGE_REPLACED
-ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:118:13-120:29
+ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:110:13-112:29
 action#android.intent.action.MY_PACKAGE_REPLACED
-ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:119:17-84
+ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:111:17-84
 	android:name
-		ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:119:25-81
+		ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:111:25-81
 intent-filter#action:name:android.bluetooth.adapter.action.STATE_CHANGED
-ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:121:13-123:29
+ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:113:13-115:29
 action#android.bluetooth.adapter.action.STATE_CHANGED
-ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:122:17-89
+ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:114:17-89
 	android:name
-		ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:122:25-86
+		ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:114:25-86
 intent-filter#action:name:android.intent.action.BOOT_COMPLETED
-ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:124:13-126:29
+ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:116:13-118:29
 action#android.intent.action.BOOT_COMPLETED
-ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:125:17-79
+ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:117:17-79
 	android:name
-		ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:125:25-76
+		ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:117:25-76
 intent-filter#action:name:incidence.BOOT_SERVICE
-ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:127:13-129:29
+ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:119:13-121:29
 action#incidence.BOOT_SERVICE
-ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:128:17-65
+ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:120:17-65
 	android:name
-		ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:128:25-62
+		ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:120:25-62
 receiver#es.incidence.core.manager.auto.AutoReceiver
-ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:132:9-135:20
+ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:124:9-127:20
 	android:enabled
-		ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:133:13-35
+		ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:125:13-35
 	android:exported
-		ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:134:13-36
+		ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:126:13-36
 	android:name
-		ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:132:19-77
+		ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:124:19-77
 service#com.e510.firebase.MyFirebaseMessagingService
-ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:156:9-162:19
+ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:148:9-154:19
 	android:exported
-		ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:158:13-37
+		ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:150:13-37
 	android:name
-		ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:157:13-72
+		ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:149:13-72
 intent-filter#action:name:com.google.firebase.MESSAGING_EVENT
-ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:159:13-161:29
+ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:151:13-153:29
 action#com.google.firebase.MESSAGING_EVENT
-ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:160:17-78
+ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:152:17-78
 	android:name
-		ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:160:25-75
+		ADDED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml:152:25-75
 uses-sdk
 INJECTED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /Users/victormmartinezfernandez/Documents/DEV/git/victor/incidence_framework/incidence_framework_android/IncidenceLibraryAndroid/core/src/main/AndroidManifest.xml

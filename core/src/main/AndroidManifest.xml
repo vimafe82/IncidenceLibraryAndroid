@@ -84,14 +84,6 @@
             android:screenOrientation="portrait"
             android:exported="false">
         </activity>
-        <activity
-            android:name=".activity.YoutubeActivity"
-            android:theme="@style/AppTheme"
-            android:windowSoftInputMode="stateHidden|adjustPan"
-            android:configChanges="keyboardHidden|orientation|screenSize|screenLayout"
-            android:screenOrientation="portrait"
-            android:exported="false">
-        </activity>
 
         <activity
             android:name=".activity.SimpleYoutubeActivity"

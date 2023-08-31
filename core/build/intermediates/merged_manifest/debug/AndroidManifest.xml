@@ -98,14 +98,6 @@
             android:windowSoftInputMode="stateHidden|adjustPan" >
         </activity>
         <activity
-            android:name="es.incidence.core.activity.YoutubeActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize|screenLayout"
-            android:exported="false"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme"
-            android:windowSoftInputMode="stateHidden|adjustPan" >
-        </activity>
-        <activity
             android:name="es.incidence.core.activity.SimpleYoutubeActivity"
             android:exported="false"
             android:theme="@style/AppTheme" />
