@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:id="@+id/layoutRound"
+    android:elevation="@dimen/default_elevation"
+    android:layout_margin="2dp">
+
+
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginRight="@dimen/activity_horizontal_margin_medium"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/ic_search"
+        android:id="@+id/imgRight" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="35dp"
+        android:background="@color/colorPrimary"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/activity_horizontal_margin_medium"
+        android:layout_toLeftOf="@+id/imgRight"
+        android:id="@+id/lineView" />
+
+
+    <com.e510.commons.view.VXEditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_toLeftOf="@+id/lineView"
+        android:background="@android:color/transparent"
+        android:text=""
+        android:lines="1"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:imeOptions="actionDone"
+        android:textColor="@color/white"
+        android:textColorHint="@color/gray"
+        android:textSize="17sp"
+        android:gravity="left|center_vertical"
+        android:layout_centerVertical="true"
+        android:id="@+id/txtInput" />
+
+</RelativeLayout>

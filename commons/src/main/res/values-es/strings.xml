@@ -1,0 +1,50 @@
+<resources>
+    <string name="app_name">Commons</string>
+    <string name="app_selector_textfield_placeholder">Tu código</string>
+    <string name="app_selector_title">Introduce aquí tu código</string>
+    <string name="app_selector_button_qr">Escanear QR</string>
+    <string name="app_selector_button_send">Enviar</string>
+    <string name="action_accept">Si</string>
+    <string name="action_denied">No</string>
+    <string name="ws_response_default_cancel_button">Cancelar</string>
+    <string name="button_retry">Reintentar</string>
+    <string name="error">Error</string>
+    <string name="empty"></string>
+    <string name="button_close">Cerrar</string>
+    <string name="onboarding_button_start">EMPEZAR</string>
+    <string name="ws_response_default_error_description">Se ha producido un error</string>
+    <string name="default_empty_ws_response_subtitle">Vuelve a hacer la petición para refrescar los datos</string>
+    <string name="default_error_ws_response_button">Volver a probar</string>
+
+    <string name="default_empty_ws_response_title">No se han encontrado resultados</string>
+    <string name="app_update_alert_message">La aplicación se ha actualizado</string>
+    <string name="about_us_title">Acerca de</string>
+    <string name="share_title">Compartir</string>
+
+    <!-- Notificaciones -->
+    <string name="default_notification_channel_id">notifications</string>
+    <string name="default_notification_channel_name">notifications</string>
+    <string name="default_notification_channel_description">notifications</string>
+
+    <!-- Messages webview -->
+    <string name="the_certificate_authority_is_not_trusted">Unreliable certificate</string>
+    <string name="the_certificate_has_expired">The certificate has expired</string>
+    <string name="the_certificate_hostname_mismatch">Certificate incompatible with the host</string>
+    <string name="the_certificate_is_not_yet_valid">The certificate is not valid yet</string>
+    <string name="do_you_want_to_continue_anyway"> Do you want to continue anyway?</string>
+    <string name="ssl_certificate_error">SSL certificate error</string>
+
+    <!-- Dates -->
+    <string name="date_now">Ahora</string>
+    <string name="date_seconds_ago">Hace %1 segundos</string>
+    <string name="date_minutes_ago">Hace %1 minutos</string>
+    <string name="date_hours_ago">Hace %1 horas</string>
+    <string name="date_days_ago">Hace %1 días</string>
+    <string name="one_hour_ago">Hace 1 hora</string>
+    <string name="one_minute_ago">Hace 1 minuto</string>
+    <string name="now">Ahora</string>
+    <string name="yesterday">Ayer</string>
+
+    <string name="ws_response_default_ok_button">Aceptar</string>
+
+</resources>

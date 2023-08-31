@@ -1556,8 +1556,6 @@ color primary_text_default_material_light
 color primary_text_disabled_material_dark
 color primary_text_disabled_material_light
 color radiobutton_themeable_attribute_color
-color redLight
-color redMedium
 color ripple_material_dark
 color ripple_material_light
 color secondary_text_default_material_dark
@@ -2295,7 +2293,6 @@ drawable home_circle4
 drawable home_circle5
 drawable ic_action_search
 drawable ic_arrow_top_right
-drawable ic_attach
 drawable ic_back
 drawable ic_back_white
 drawable ic_baterry
@@ -2420,6 +2417,7 @@ drawable loading
 drawable logo
 drawable logo2
 drawable logo_e510
+drawable logo_e510_old
 drawable logotype
 drawable mapbox_compass_icon
 drawable mapbox_info_bg_selector

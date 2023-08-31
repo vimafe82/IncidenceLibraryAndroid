@@ -1,0 +1,28 @@
+# compiler: R8
+# compiler_version: 1.5.69
+# pg_map_id: acc8311
+com.e510.location.BuildConfig -> com.e510.location.BuildConfig:
+    1:1:void <init>():6:6 -> <init>
+com.e510.location.LocationManager -> com.e510.location.LocationManager:
+    1:1:void <init>():25:25 -> <init>
+    1:3:void getLocation(android.content.Context,com.e510.location.LocationManager$LocationListener):147:149 -> getLocation
+    4:14:void obtenerLocation(android.content.Context,com.google.android.gms.location.LocationCallback):171:181 -> getLocation
+    4:14:void getLocation(android.content.Context,com.e510.location.LocationManager$LocationListener):149 -> getLocation
+    15:15:void getLocation(android.content.Context,com.e510.location.LocationManager$LocationListener):163:163 -> getLocation
+    1:7:boolean hasBackgroundPermission(android.content.Context):99:105 -> hasBackgroundPermission
+    1:1:boolean hasPermission(android.content.Context):31:31 -> hasPermission
+    1:14:boolean isLocationEnabled(android.content.Context):128:141 -> isLocationEnabled
+    1:16:void openSettingsPermissions(int,android.app.Activity):78:93 -> openSettingsPermissions
+    1:3:void requestPermission(int,android.app.Activity):36:38 -> requestPermission
+    1:10:void requestPermissionWithBackground(int,android.app.Activity):110:119 -> requestPermissionWithBackground
+    1:30:void showPermissionRequiredDialog(int,android.app.Activity,android.content.DialogInterface$OnClickListener):44:73 -> showPermissionRequiredDialog
+com.e510.location.LocationManager$1 -> com.e510.location.LocationManager$a:
+    android.content.DialogInterface$OnClickListener val$askListener -> a
+    int val$code -> b
+    android.app.Activity val$activity -> c
+    1:1:void <init>(android.content.DialogInterface$OnClickListener,int,android.app.Activity):45:45 -> <init>
+    1:12:void onClick(android.content.DialogInterface,int):49:60 -> onClick
+com.e510.location.LocationManager$2 -> com.e510.location.LocationManager$b:
+    com.e510.location.LocationManager$LocationListener val$listener -> a
+    1:1:void <init>(com.e510.location.LocationManager$LocationListener):149:149 -> <init>
+    1:3:void onLocationResult(com.google.android.gms.location.LocationResult):152:154 -> onLocationResult

@@ -1,0 +1,88 @@
+# compiler: R8
+# compiler_version: 1.5.69
+# pg_map_id: 3dcc0af
+com.e510.networking.BuildConfig -> com.e510.networking.BuildConfig:
+    1:1:void <init>():6:6 -> <init>
+com.e510.networking.Mapper -> com.e510.networking.Mapper:
+    1:1:void <init>():12:12 -> <init>
+    1:6:java.lang.String get(java.lang.String,java.lang.String):21:26 -> get
+    7:13:java.lang.String get(java.lang.String,java.lang.String):24:30 -> get
+    14:17:java.lang.Object get(java.lang.Class,java.lang.String):44:47 -> get
+    18:26:java.lang.Object get(java.lang.String,java.lang.Class,java.lang.String):61:69 -> get
+    27:27:java.lang.Object get(java.lang.String,java.lang.Class,java.lang.String):67:67 -> get
+    28:33:org.json.JSONObject get(java.lang.String):83:88 -> get
+    34:34:org.json.JSONObject get(java.lang.String):86:86 -> get
+    1:2:java.util.ArrayList getList(java.lang.Class,java.lang.String):97:98 -> getList
+    3:21:java.util.ArrayList getList(java.lang.Class,java.lang.String,java.lang.String):103:121 -> getList
+    22:22:java.util.ArrayList getList(java.lang.Class,java.lang.String,java.lang.String):119:119 -> getList
+    23:45:java.util.ArrayList getList(java.lang.String,java.lang.Class,java.lang.String):130:152 -> getList
+    46:46:java.util.ArrayList getList(java.lang.String,java.lang.Class,java.lang.String):150:150 -> getList
+com.e510.networking.Networking -> com.e510.networking.Networking:
+    android.content.Context context -> a
+    java.util.ArrayList netWorkingListeners -> e
+    java.lang.String authorization -> c
+    boolean decryptResponses -> b
+    java.util.HashMap customHeaders -> d
+    com.e510.networking.Networking INSTANCE -> f
+    1:1:void <init>():20:20 -> <init>
+    1:7:void addBasicData(com.androidnetworking.common.ANRequest$PostRequestBuilder):79:85 -> a
+    8:12:void addBasicData(com.androidnetworking.common.ANRequest$GetRequestBuilder):90:94 -> a
+    13:16:void post(com.androidnetworking.common.ANRequest$PostRequestBuilder,com.e510.networking.RequestListener):150:153 -> a
+    1:2:void addNetworkingListener(com.e510.networking.NetWorkingListener):53:54 -> addNetworkingListener
+    1:11:void deleteDirect(java.lang.String,java.util.HashMap,com.androidnetworking.interfaces.JSONObjectRequestListener):296:306 -> deleteDirect
+    1:1:void get(java.lang.String,java.util.HashMap,com.e510.networking.RequestListener):250:250 -> get
+    2:12:void get(java.lang.String,java.util.HashMap,com.e510.networking.RequestListener,boolean):255:265 -> get
+    1:11:void getDirect(java.lang.String,java.util.HashMap,com.androidnetworking.interfaces.JSONObjectRequestListener):280:290 -> getDirect
+    1:1:com.e510.networking.Networking getInstance():31:31 -> getInstance
+    1:1:boolean hasBasicHeader(java.lang.String):104:104 -> hasBasicHeader
+    1:13:com.e510.networking.Networking init(android.content.Context,boolean):34:46 -> init
+    1:1:void onNetworkingError(com.androidnetworking.error.ANError,com.e510.networking.RequestListener):328:328 -> onNetworkingError
+    1:1:void onNetworkingResponse(org.json.JSONObject,com.e510.networking.RequestListener,boolean):314:314 -> onNetworkingResponse
+    2:6:void onNetworkResponse(com.e510.networking.Response):64:68 -> onNetworkingResponse
+    2:6:void onNetworkingResponse(org.json.JSONObject,com.e510.networking.RequestListener,boolean):315 -> onNetworkingResponse
+    7:7:void onNetworkingResponse(org.json.JSONObject,com.e510.networking.RequestListener,boolean):318:318 -> onNetworkingResponse
+    1:9:void post(java.lang.String,java.lang.Object,com.e510.networking.RequestListener):111:119 -> post
+    10:18:void post(java.lang.String,org.json.JSONArray,com.e510.networking.RequestListener):124:132 -> post
+    19:27:void post(java.lang.String,org.json.JSONObject,com.e510.networking.RequestListener):137:145 -> post
+    1:11:void postDirect(java.lang.String,java.util.HashMap,com.androidnetworking.interfaces.JSONObjectRequestListener):168:178 -> postDirect
+    12:22:void postDirect(java.lang.String,org.json.JSONObject,com.androidnetworking.interfaces.JSONObjectRequestListener):183:193 -> postDirect
+    1:11:void put(java.lang.String,java.util.HashMap,com.e510.networking.RequestListener):198:208 -> put
+    1:10:void putDirect(java.lang.String,java.util.HashMap,com.androidnetworking.interfaces.JSONObjectRequestListener):223:232 -> putDirect
+    11:21:void putDirect(java.lang.String,org.json.JSONObject,com.androidnetworking.interfaces.JSONObjectRequestListener):236:246 -> putDirect
+    1:1:void removeNetworkingListener(com.e510.networking.NetWorkingListener):59:59 -> removeNetworkingListener
+    1:1:void setAuthorization(java.lang.String):74:74 -> setAuthorization
+    1:1:void setBasicHeader(java.lang.String,java.lang.String):99:99 -> setBasicHeader
+com.e510.networking.Networking$1 -> com.e510.networking.Networking$a:
+    com.e510.networking.RequestListener val$requestListener -> a
+    1:1:void <init>(com.e510.networking.RequestListener):153:153 -> <init>
+    1:1:void onError(com.androidnetworking.error.ANError):160:160 -> onError
+    1:1:void onResponse(org.json.JSONObject):156:156 -> onResponse
+    2:2:boolean com.e510.networking.Networking.access$000(com.e510.networking.Networking):20:20 -> onResponse
+    2:2:void onResponse(org.json.JSONObject):156 -> onResponse
+    3:3:void onResponse(org.json.JSONObject):156:156 -> onResponse
+com.e510.networking.Networking$2 -> com.e510.networking.Networking$b:
+    com.e510.networking.RequestListener val$requestListener -> a
+    1:1:void <init>(com.e510.networking.RequestListener):208:208 -> <init>
+    1:1:void onError(com.androidnetworking.error.ANError):215:215 -> onError
+    1:1:void onResponse(org.json.JSONObject):211:211 -> onResponse
+    2:2:boolean com.e510.networking.Networking.access$000(com.e510.networking.Networking):20:20 -> onResponse
+    2:2:void onResponse(org.json.JSONObject):211 -> onResponse
+    3:3:void onResponse(org.json.JSONObject):211:211 -> onResponse
+com.e510.networking.Networking$3 -> com.e510.networking.Networking$c:
+    com.e510.networking.RequestListener val$requestListener -> a
+    boolean val$encrypt -> b
+    1:1:void <init>(com.e510.networking.RequestListener,boolean):265:265 -> <init>
+    1:1:void onError(com.androidnetworking.error.ANError):272:272 -> onError
+    1:1:void onResponse(org.json.JSONObject):268:268 -> onResponse
+com.e510.networking.Response -> com.e510.networking.Response:
+    1:1:void <init>():10:10 -> <init>
+    1:26:com.e510.networking.Response generate(org.json.JSONObject,boolean):43:68 -> generate
+    27:31:com.e510.networking.Response generate(com.androidnetworking.error.ANError):77:81 -> generate
+    1:1:java.lang.String get(java.lang.String):93:93 -> get
+    2:2:java.lang.Object get(java.lang.Class):98:98 -> get
+    3:3:java.lang.Object get(java.lang.String,java.lang.Class):103:103 -> get
+    4:4:org.json.JSONObject get():108:108 -> get
+    1:1:java.util.ArrayList getList(java.lang.Class):113:113 -> getList
+    2:2:java.util.ArrayList getList(java.lang.Class,java.lang.String):118:118 -> getList
+    3:3:java.util.ArrayList getList(java.lang.String,java.lang.Class):123:123 -> getList
+    1:1:boolean isSuccess():88:88 -> isSuccess

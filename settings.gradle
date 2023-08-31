@@ -1,3 +1,6 @@
 include ':app', ':core'
 rootProject.name='IncidenceLibraryAndroid'
 include ':incidenceLibrary'
+include ':networking'
+include ':commons'
+include ':location'

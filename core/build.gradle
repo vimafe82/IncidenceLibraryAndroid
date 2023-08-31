@@ -46,7 +46,8 @@ dependencies {
 
 
     //implementation(name:'commons-release', ext:'aar')
-    api files('libs/commons-release.aar')
+    //api files('libs/commons-release.aar')
+    implementation project(path: ':commons')
     api 'org.greenrobot:eventbus:3.3.1'
     implementation 'net.yslibrary.keyboardvisibilityevent:keyboardvisibilityevent:3.0.0-RC2'
     implementation 'com.google.code.gson:gson:2.10'
@@ -56,11 +57,13 @@ dependencies {
     //implementation project(":commons")
 
     //implementation(name:'location-release', ext:'aar')
-    api files('libs/location-release.aar')
+    //api files('libs/location-release.aar')
+    implementation project(path: ':location')
     implementation 'com.google.android.gms:play-services-location:17.0.0'
 
     //implementation(name:'networking-release', ext:'aar')
-    api files('libs/networking-release.aar')
+    //api files('libs/networking-release.aar')
+    implementation project(path: ':networking')
     implementation "com.amitshekhar.android:jackson-android-networking:1.0.2"
 
     //implementation(name:'firebase-release', ext:'aar')

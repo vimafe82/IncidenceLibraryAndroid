@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Location</string>
+    <string name="required_location_permission_text">Proporciona acceso al permiso de ubicación para que funcione esta funcionalidad.</string>
+    <string name="required_location_ok_text">Aceptar</string>
+    <string name="required_location_cancel_text">Cancelar</string>
+</resources>

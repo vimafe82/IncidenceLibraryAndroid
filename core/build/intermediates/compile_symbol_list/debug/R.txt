@@ -1555,8 +1555,6 @@ int color primary_text_default_material_light 0x0
 int color primary_text_disabled_material_dark 0x0
 int color primary_text_disabled_material_light 0x0
 int color radiobutton_themeable_attribute_color 0x0
-int color redLight 0x0
-int color redMedium 0x0
 int color ripple_material_dark 0x0
 int color ripple_material_light 0x0
 int color secondary_text_default_material_dark 0x0
@@ -2294,7 +2292,6 @@ int drawable home_circle4 0x0
 int drawable home_circle5 0x0
 int drawable ic_action_search 0x0
 int drawable ic_arrow_top_right 0x0
-int drawable ic_attach 0x0
 int drawable ic_back 0x0
 int drawable ic_back_white 0x0
 int drawable ic_baterry 0x0
@@ -2419,6 +2416,7 @@ int drawable loading 0x0
 int drawable logo 0x0
 int drawable logo2 0x0
 int drawable logo_e510 0x0
+int drawable logo_e510_old 0x0
 int drawable logotype 0x0
 int drawable mapbox_compass_icon 0x0
 int drawable mapbox_info_bg_selector 0x0
