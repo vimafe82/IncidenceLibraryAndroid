@@ -1,0 +1,506 @@
+package es.incidence.core.fragment.beacon;
+
+import static com.e510.commons.utils.LogUtil.makeLogTag;
+
+import android.content.DialogInterface;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.os.Handler;
+import android.os.Looper;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
+import androidx.core.graphics.drawable.DrawableCompat;
+
+import com.e510.commons.utils.FontUtils;
+import com.e510.commons.utils.LogUtil;
+import com.e510.commons.utils.Utils;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
+
+import es.incidence.core.Constants;
+import es.incidence.core.Core;
+import com.e510.incidencelibrary.R;
+import es.incidence.core.adapter.IncidenceDGTListAdapter;
+import es.incidence.core.domain.Beacon;
+import es.incidence.core.domain.IncidenceDGT;
+import es.incidence.core.entity.ListItem;
+import es.incidence.core.fragment.IFragment;
+import es.incidence.core.fragment.incidence.report.IncidenceReportFragment;
+import es.incidence.core.manager.Api;
+import es.incidence.core.manager.IRequestListener;
+import es.incidence.core.manager.IResponse;
+import es.incidence.core.utils.IUtils;
+import es.incidence.core.utils.view.IButton;
+import es.incidence.core.utils.view.INavigation;
+
+public class BeaconDetailFragment extends IFragment
+{
+    private static final String TAG = makeLogTag(BeaconDetailFragment.class);
+
+    public static final String KEY_BEACON = "KEY_BEACON";
+
+    private INavigation navigation;
+    private RelativeLayout layoutRootBeaconDetailFind;
+    private RelativeLayout layoutRootBeaconDetailInfo;
+    private TextView txtTimeBeacon;
+    private TextView txtVolverFind;
+    private TextView txtVolverInfo;
+    private ProgressBar progressBar;
+    private TextView txtSubTitleBattery;
+    private TextView txtSubtitleFecha;
+    private ImageView imgInfo;
+
+    private ListView listView;
+    private IncidenceDGTListAdapter adapter;
+
+    private RelativeLayout layoutStopDevice;
+    private CardView alertVolumeErrorContainer;
+    private TextView alertVolumeErrorTitle;
+    private TextView alertVolumeErrorSubTitle;
+    private ImageView alertVolumeErrorImgClose;
+    private ImageView imgDesc;
+
+    private RelativeLayout layoutNewIncidence;
+    private CardView alertNewIncidenceContainer;
+    private TextView alertNewIncidenceTitle;
+    private TextView alertNewIncidenceSubTitle;
+    private ImageView alerNewIncidenceImgClose;
+    private ImageView imgDescNewIncidence;
+    public IButton btnBlue;
+
+    private CountDownTimer countDownTimer;
+    private Handler handlerVibrate;
+
+    private Beacon beacon;
+
+    private Integer battery;
+    private String expirationDate;
+    private Integer dgt;
+    public ArrayList<IncidenceDGT> items;
+
+    private long secondsRemainingConfig = 90;
+    private long secondsRemaining = -1;
+
+    private boolean closedAlertStopDevice = false;
+    private boolean closedAlertNewIncidence = false;
+
+    private Handler h;
+
+    private boolean hasVibrate = false;
+
+    public static BeaconDetailFragment newInstance(Beacon beacon)
+    {
+        BeaconDetailFragment fragment = new BeaconDetailFragment();
+
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(KEY_BEACON, beacon);
+        fragment.setArguments(bundle);
+
+        return fragment;
+    }
+
+    @Override
+    public int getTitleId() {
+        return R.string.beacon;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if(getArguments() != null) {
+            beacon = getArguments().getParcelable(KEY_BEACON);
+        }
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    {
+        View view = inflater.inflate(R.layout.fragment_beacon_detail, container, false);
+        setupUI(view);
+
+        return view;
+    }
+
+    @Override
+    public void onDestroy() {
+        stopCountDownTimer();
+        stopCountDownTimerVibrate();
+        cancelHandler();
+        super.onDestroy();
+    }
+
+    @Override
+    public void setupUI(View rootView) {
+        super.setupUI(rootView);
+
+        navigation = rootView.findViewById(R.id.inavigation);
+
+        String title = beacon.name;
+        navigation.init(this, title, true);
+
+        layoutRootBeaconDetailFind = rootView.findViewById(R.id.layoutRootBeaconDetailFind);
+        layoutRootBeaconDetailInfo = rootView.findViewById(R.id.layoutRootBeaconDetailInfo);
+
+        txtTimeBeacon = rootView.findViewById(R.id.txtTimeBeacon);
+
+        progressBar = layoutRootBeaconDetailInfo.findViewById(R.id.progressBar);
+        //progressBar.getProgressDrawable().setColorFilter(Color.RED, android.graphics.PorterDuff.Mode.SRC_IN);
+        //progressBar.setProgress(20);
+        //progressBar.setMax(100);
+
+        txtSubTitleBattery = layoutRootBeaconDetailInfo.findViewById(R.id.txtSubTitleBattery);
+        txtSubtitleFecha = layoutRootBeaconDetailInfo.findViewById(R.id.txtSubtitleFecha);
+
+        //---
+        layoutStopDevice = rootView.findViewById(R.id.layoutStopDevice);
+        alertVolumeErrorContainer = layoutStopDevice.findViewById(R.id.alertVolumeErrorContainer);
+        alertVolumeErrorTitle = layoutStopDevice.findViewById(R.id.alertVolumeErrorTitle);
+        alertVolumeErrorSubTitle = layoutStopDevice.findViewById(R.id.alertVolumeErrorSubTitle);
+        alertVolumeErrorImgClose = layoutStopDevice.findViewById(R.id.alertVolumeErrorImgClose);
+        imgDesc = layoutStopDevice.findViewById(R.id.imgDesc);
+        FontUtils.setTypeValueText(alertVolumeErrorTitle, Constants.FONT_SEMIBOLD, getContext());
+        FontUtils.setTypeValueText(alertVolumeErrorSubTitle, Constants.FONT_REGULAR, getContext());
+        alertVolumeErrorImgClose.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    closeAlertStopDeviceView();
+                }
+            }
+        );
+        alertVolumeErrorTitle.setText(getString(R.string.stop_device));
+        alertVolumeErrorSubTitle.setText(getString(R.string.stop_device_desc));
+        //imgDesc.setImageDrawable(getContext().getDrawable(R.drawable.ico_conection));
+        imgDesc.setImageDrawable(Utils.getDrawable(getContext(), R.drawable.ico_conection));
+        DrawableCompat.setTint(imgDesc.getDrawable(), Utils.getColor(getContext(), R.color.colorPrimary));
+
+        layoutNewIncidence = rootView.findViewById(R.id.layoutNewIncidence);
+        alertNewIncidenceContainer = layoutNewIncidence.findViewById(R.id.alertVolumeErrorContainer);
+        alertNewIncidenceTitle = layoutNewIncidence.findViewById(R.id.alertVolumeErrorTitle);
+        alertNewIncidenceSubTitle = layoutNewIncidence.findViewById(R.id.alertVolumeErrorSubTitle);
+        alerNewIncidenceImgClose = layoutNewIncidence.findViewById(R.id.alertVolumeErrorImgClose);
+        imgDescNewIncidence = layoutNewIncidence.findViewById(R.id.imgDesc);
+        btnBlue = layoutNewIncidence.findViewById(R.id.btnBlue);
+        FontUtils.setTypeValueText(alertNewIncidenceTitle, Constants.FONT_SEMIBOLD, getContext());
+        FontUtils.setTypeValueText(alertNewIncidenceSubTitle, Constants.FONT_REGULAR, getContext());
+        alerNewIncidenceImgClose.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    closeAlertNewIncidenceView();
+                }
+            }
+        );
+        alertNewIncidenceTitle.setText(getString(R.string.alert_new_incidence_title));
+        alertNewIncidenceSubTitle.setText(getString(R.string.alert_new_incidence_subtitle));
+        //imgDesc.setImageDrawable(getContext().getDrawable(R.drawable.ico_conection));
+        imgDescNewIncidence.setImageDrawable(Utils.getDrawable(getContext(), R.drawable.ico_conection));
+        DrawableCompat.setTint(imgDescNewIncidence.getDrawable(), Utils.getColor(getContext(), R.color.colorPrimary));
+        btnBlue.setVisibility(View.VISIBLE);
+        btnBlue.setText(getString(R.string.report_incidence));
+        btnBlue.setPrimaryColors();
+        btnBlue.setHeight((int)getResources().getDimension(R.dimen.margin_normal_medium));
+        FontUtils.setTypeValueText(btnBlue, Constants.FONT_SEMIBOLD, getContext());
+        btnBlue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                mListener.addFragmentAnimated(IncidenceReportFragment.newInstance(beacon.vehicle, beacon.vehicle, false));
+            }
+        });
+        //---
+
+        txtVolverFind = layoutRootBeaconDetailFind.findViewById(R.id.txtVolverFind);
+        txtVolverFind.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onClickReturn();
+            }
+        });
+        FontUtils.setTypeValueText(txtVolverFind, Constants.FONT_SEMIBOLD, getContext());
+
+        txtVolverInfo = layoutRootBeaconDetailInfo.findViewById(R.id.txtVolverInfo);
+        txtVolverInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onClickReturn();
+            }
+        });
+        FontUtils.setTypeValueText(txtVolverInfo, Constants.FONT_SEMIBOLD, getContext());
+
+        listView = layoutRootBeaconDetailInfo.findViewById(R.id.listView);
+        items = new ArrayList<>();
+        adapter = new IncidenceDGTListAdapter(this, items);
+        listView.setAdapter(adapter);
+
+        imgInfo = layoutRootBeaconDetailInfo.findViewById(R.id.imgInfo);
+        imgInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goToBeaconInfo();
+            }
+        });
+
+        startCountDownTimer();
+    }
+
+    private void startCountDownTimer() {
+        stopCountDownTimer();
+
+        countDownTimer = new CountDownTimer(1000 * secondsRemainingConfig, 1000) {
+        //countDownTimer = new CountDownTimer(1000 * 10, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+                secondsRemaining = TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished));
+                String time = String.format("00:%02d", secondsRemaining);
+                long minutes = TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished);
+                if (minutes > 0)
+                {
+                    time = String.format("%02d:%02d", minutes, secondsRemaining);
+                }
+
+                LogUtil.logE(TAG, "onTick: " + time);
+                txtTimeBeacon.setText(time);
+
+                /*
+                if ((seconds+1) % 5 == 0) {
+                    refreshData();
+                }
+                */
+            }
+
+            public void onFinish()
+            {
+                showAlertConfirm(getString(R.string.start_device_without_network), getString(R.string.start_device_without_network_desc), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        startCountDownTimer();
+                    }
+                }, getString(R.string.accept), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        onClickReturn();
+                    }
+                }, getString(R.string.cancel));
+            }
+        };
+        countDownTimer.start();
+    }
+
+    private void startCountDownTimerVibrate() {
+        if (handlerVibrate == null && !closedAlertNewIncidence) {
+            IUtils.vibrate(getContext());
+
+            handlerVibrate = new Handler(Looper.getMainLooper());
+            handlerVibrate.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        handlerVibrate = null;
+                        startCountDownTimerVibrate();
+                    } catch (Exception e) {
+                        Log.e(TAG, "Error: " + e.getMessage());
+                    }
+                }
+            }, 1000);
+        }
+    }
+    private void stopCountDownTimer() {
+        if (countDownTimer != null) {
+            countDownTimer.cancel();
+            countDownTimer = null;
+        }
+    }
+
+    private void cancelHandler() {
+        if (h != null) {
+            h.removeCallbacksAndMessages(null);
+            h = null;
+        }
+    }
+
+    private void stopCountDownTimerVibrate() {
+        if (handlerVibrate != null) {
+            handlerVibrate.removeCallbacksAndMessages(null);
+            handlerVibrate = null;
+        }
+    }
+
+    private void onClickReturn() {
+        closeThis();
+    }
+
+    @Override
+    public void loadData()
+    {
+        refreshData();
+    }
+
+    private void refreshData() {
+        Api.getBeaconDetail(new IRequestListener() {
+            @Override
+            public void onFinish(IResponse response) {
+
+                //hideHud();
+
+                if (response.isSuccess())
+                {
+                    try {
+                        JSONObject obj = response.get();
+                        //JSONObject obj = new JSONObject("{\"dgt\":0,\"incidences\":[{\"hour\":\"17:23\",\"id\":1,\"lat\":41.38879,\"lon\":2.1589900000000002,\"date\":\"27/10/2022\"},{\"hour\":\"22:10\",\"id\":2,\"lat\":41.38879,\"lon\":2.1589900000000002,\"date\":\"21/10/2022\"},{\"hour\":\"11:20\",\"id\":3,\"lat\":41.38879,\"lon\":2.1589900000000002,\"date\":\"16/10/2022\"},{\"hour\":\"09:33\",\"id\":4,\"lat\":41.38879,\"lon\":2.1589900000000002,\"date\":\"08/10/2022\"},{\"hour\":\"10:00\",\"id\":5,\"lat\":41.38879,\"lon\":2.1589900000000002,\"date\":\"01/10/2022\"}],\"expirationDate\":\"2037-12-31 23:59:59\",\"battery\":27.999999999999972,\"imei\":\"869154040054509\"}");
+                        if (obj != null) {
+                            JSONObject data = obj.optJSONObject("data");
+                            //JSONObject data = new JSONObject("{\"dgt\":0,\"incidences\":[{\"hour\":\"17:23\",\"id\":1,\"lat\":41.38879,\"lon\":2.1589900000000002,\"date\":\"27/10/2022\"},{\"hour\":\"22:10\",\"id\":2,\"lat\":41.38879,\"lon\":2.1589900000000002,\"date\":\"21/10/2022\"},{\"hour\":\"11:20\",\"id\":3,\"lat\":41.38879,\"lon\":2.1589900000000002,\"date\":\"16/10/2022\"},{\"hour\":\"09:33\",\"id\":4,\"lat\":41.38879,\"lon\":2.1589900000000002,\"date\":\"08/10/2022\"},{\"hour\":\"10:00\",\"id\":5,\"lat\":41.38879,\"lon\":2.1589900000000002,\"date\":\"01/10/2022\"}],\"expirationDate\":\"2037-12-31 23:59:59\",\"battery\":27.999999999999972,\"imei\":\"869154040054509\"}");
+                            if (data != null) {
+                                if (data.has("battery")) battery = data.getInt("battery");
+                                if (data.has("expirationDate")) expirationDate = data.getString("expirationDate");
+                                if (data.has("dgt")) dgt = data.getInt("dgt");
+
+                                items.clear();
+                                JSONArray incidences = data.optJSONArray("incidences");
+                                if (incidences != null) {
+                                    for (int i = 0; i < incidences.length(); i++) {
+                                        JSONObject incidence = incidences.getJSONObject(i);
+
+                                        Double lat = null;
+                                        Double lon = null;
+                                        String date = null;
+                                        String hour = null;
+                                        if (incidence.has("lat")) lat = incidence.getDouble("lat");
+                                        if (incidence.has("lon")) lon = incidence.getDouble("lon");
+                                        if (incidence.has("date")) date = incidence.getString("date");
+                                        if (incidence.has("hour")) hour = incidence.getString("hour");
+
+                                        IncidenceDGT incidenceDGT = new IncidenceDGT();
+                                        incidenceDGT.lat = lat;
+                                        incidenceDGT.lon = lon;
+                                        incidenceDGT.date = date;
+                                        incidenceDGT.hour = hour;
+
+                                        //ListItem li = new ListItem("20-05-2021, 16:45h", "");
+                                        items.add(incidenceDGT);
+                                    }
+                                }
+
+                                if (dgt == 0) {
+                                    openAlertStopDeviceView();
+                                } else if (dgt == 1) {
+                                    /*
+                                    if (!hasVibrate) {
+                                        hasVibrate = true;
+                                        IUtils.vibrate(getContext());
+                                    }
+                                    */
+                                    startCountDownTimerVibrate();
+
+                                    closeAlertStopDeviceView();
+                                    openAlertNewIncidenceView();
+                                }
+
+                                changeView();
+                                callRetry();
+                            } else {
+                                if (battery != null) {
+                                    closeAlertStopDeviceView();
+                                    closeAlertNewIncidenceView();
+                                    stopCountDownTimerVibrate();
+                                }
+                                callRetry();
+                            }
+                        } else {
+                            callRetry();
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+                else
+                {
+                    DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            onClickReturn();
+                        }
+                    };
+                    stopCountDownTimer();
+                    stopCountDownTimerVibrate();
+                    onBadResponse(response, listener);
+                }
+            }
+
+            private void callRetry() {
+                if (secondsRemaining > 0) {
+                    h = new Handler();
+                    h.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            refreshData();
+                        }
+                    }, 5000);
+                }
+
+            }
+        }, beacon.imei);
+    }
+
+    private void openAlertStopDeviceView() {
+        if (!closedAlertStopDevice) {
+            alertVolumeErrorContainer.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void closeAlertStopDeviceView() {
+        closedAlertStopDevice = true;
+        alertVolumeErrorContainer.setVisibility(View.GONE);
+    }
+
+    private void openAlertNewIncidenceView() {
+        if (!closedAlertNewIncidence) {
+            alertNewIncidenceContainer.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void closeAlertNewIncidenceView() {
+        closedAlertNewIncidence = true;
+        alertNewIncidenceContainer.setVisibility(View.GONE);
+
+        stopCountDownTimerVibrate();
+    }
+
+    private void changeView() {
+        stopCountDownTimer();
+
+        layoutRootBeaconDetailFind.setVisibility(View.GONE);
+        layoutRootBeaconDetailInfo.setVisibility(View.VISIBLE);
+
+        progressBar.setProgress(battery);
+        if (battery <= 20) {
+            progressBar.getProgressDrawable().setColorFilter(Color.RED, android.graphics.PorterDuff.Mode.SRC_IN);
+            DrawableCompat.setTint(imgInfo.getDrawable(), Color.RED);
+        }
+
+        txtSubTitleBattery.setText(battery + " %");
+        txtSubtitleFecha.setText(expirationDate);
+
+        adapter.notifyDataSetChanged();
+    }
+
+    private void goToBeaconInfo()
+    {
+        mListener.addFragmentAnimated(BeaconDetailInfoFragment.newInstance(beacon));
+    }
+}

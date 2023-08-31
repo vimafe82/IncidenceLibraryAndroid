@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/activity_vertical_margin">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/titleLinearLayout"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/darkGray"
+            android:textSize="12sp"
+            android:text=""
+            android:id="@+id/txtTitle"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/warning"
+            android:textSize="16sp"
+            android:text="*"
+            android:visibility="gone"
+            android:id="@+id/mandatoryTextView"/>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:background="@color/white"
+        android:id="@+id/layoutRound"
+        android:layout_below="@+id/titleLinearLayout">
+
+        <ImageView
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:scaleType="fitCenter"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="12dp"
+            android:src="@drawable/ic_email"
+            android:id="@+id/imgLeft"
+            android:visibility="gone"/>
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:scaleType="fitCenter"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="12dp"
+            android:src="@drawable/ic_hide"
+            android:id="@+id/imgRight"
+            android:visibility="gone"/>
+
+        <com.e510.commons.view.VXEditText
+            android:duplicateParentState="true"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:padding="4dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="6dp"
+            android:layout_marginRight="6dp"
+            android:background="@color/clear"
+            android:hint=""
+            android:textSize="15sp"
+            android:layout_toLeftOf="@+id/imgRight"
+            android:layout_toRightOf="@+id/imgLeft"
+            android:id="@+id/txtInput"/>
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

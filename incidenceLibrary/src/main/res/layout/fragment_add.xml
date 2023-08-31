@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true"
+    android:background="@color/incidence100"
+    android:id="@+id/layoutRootAdd">
+
+    <es.incidence.core.utils.view.INavigation
+        android:id="@+id/inavigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <RelativeLayout
+        android:layout_below="@+id/inavigation"
+        android:id="@+id/layoutHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_normal"
+        android:layout_marginRight="@dimen/margin_normal"
+        android:layout_marginTop="40dp">
+
+        <TextView
+            android:id="@+id/txtHeaderVehicle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black600"
+            android:textSize="16sp"
+            android:lineHeight="26dp"
+            android:text="@string/select_vehicle_or_beacon"
+            android:gravity="center" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_below="@+id/layoutHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:layout_marginLeft="@dimen/margin_normal_double"
+        android:layout_marginRight="@dimen/margin_normal_double"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <com.e510.commons.view.SquareRelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginRight="20dp"
+            android:id="@+id/select_car">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/vehicle_car" />
+        </com.e510.commons.view.SquareRelativeLayout>
+
+        <com.e510.commons.view.SquareRelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="20dp"
+            android:id="@+id/select_beacon">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/beacon_with_background" />
+        </com.e510.commons.view.SquareRelativeLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

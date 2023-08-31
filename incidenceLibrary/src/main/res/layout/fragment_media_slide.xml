@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/black"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true">
+
+    <com.viewpagerindicator.CirclePageIndicator
+        android:id="@+id/circlePageIndicator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:padding="20dp"
+        android:background="@android:color/transparent"
+        app:strokeColor="@color/white"
+        app:strokeWidth="3dp"
+        app:pageColor="@color/lightGray"
+        app:fillColor="@color/colorPrimary"
+        app:centered="true"
+        app:radius="4dp" />
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/circlePageIndicator"/>
+
+    <RelativeLayout
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentRight="true"
+        android:id="@+id/layoutRightClose">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_close"
+            android:layout_centerInParent="true"
+            android:id="@+id/imgRightClose"/>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

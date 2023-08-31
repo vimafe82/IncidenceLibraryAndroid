@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="46dp">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/margin_normal"
+        android:id="@+id/viewMargin"/>
+
+    <TextView
+        android:layout_below="@+id/viewMargin"
+        android:id="@+id/txtTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/featured_insurance"
+        android:textColor="@color/black600"
+        android:textSize="10sp"
+        android:lineHeight="22dp"
+        android:layout_marginLeft="@dimen/margin_normal"
+        android:layout_marginRight="@dimen/margin_normal"
+        android:layout_centerVertical="true"/>
+
+</RelativeLayout>
