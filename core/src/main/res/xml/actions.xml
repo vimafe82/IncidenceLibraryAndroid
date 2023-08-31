@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<actions>
+
+    <action intentName="actions.intent.FAULT">
+
+        <!-- Each action requires at least one fulfillment that defines how the app will handle this action -->
+        <!-- Define the urlTemplate in the format you define your deeplinks in AndroidManifest.xml -->
+
+        <fulfillment urlTemplate="https://fit-actions.firebaseapp.com/start{?exerciseType}">
+
+            <!-- Define how the actions parameters (intentParameter) is mapped in the urlTemplate above -->
+
+            <parameter-mapping
+                intentParameter="exercise.name"
+                urlParameter="exerciseType" />
+
+        </fulfillment>
+
+    </action>
+
+    <action intentName="actions.intent.STOP_EXERCISE">
+        <fulfillment urlTemplate="https://fit-actions.firebaseapp.com/stop" />
+    </action>
+
+    <action intentName="actions.intent.GET_EXERCISE_OBSERVATION">
+
+        <!-- You can define the fulfillment mode, it can be SLICE or DEEPLINK -->
+        <!-- When slice is used, make sure you are supporting slices in your app -->
+        <!-- Also, not that the urlTemplate must be of the style content://{slice_provider_authority}/... -->
+        <!-- Make sure that the authority matches with the one defined in AndroidManifest.xml -->
+
+        <fulfillment
+            fulfillmentMode="actions.fulfillment.SLICE"
+            urlTemplate="content://com.devrel.android.fitactions.slices.provider/stats{?exerciseType}">
+
+            <!-- If a parameter is set as required, the action will only be fulfilled if the parameter is found -->
+            <!-- That's why a fallback urlTemplate needs to be provided for such case. -->
+
+            <parameter-mapping
+                intentParameter="exerciseObservation.aboutExercise.name"
+                required="true"
+                urlParameter="exerciseType" />
+
+        </fulfillment>
+
+        <!-- In case the exercise name is not found we fallback to the stats deep-link inside the app -->
+
+        <fulfillment
+            fulfillmentMode="actions.fulfillment.DEEPLINK"
+            urlTemplate="https://fit-actions.firebaseapp.com/stats" />
+
+    </action>
+
+</actions>

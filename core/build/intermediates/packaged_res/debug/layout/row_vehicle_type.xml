@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layoutRoot"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/margin_normal"
+    android:orientation="horizontal"
+    android:weightSum="2"
+    android:clickable="true">
+
+    <com.e510.commons.view.SquareRelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:layout_weight="1"
+        android:layout_marginRight="20dp"
+        android:id="@+id/select_left">
+
+        <com.e510.commons.view.CircleImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:civ_circle_background_color="@android:color/white"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/select_left_img"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:src="@drawable/vehicle_car"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHeight_percent=".5"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent=".5" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </com.e510.commons.view.SquareRelativeLayout>
+
+    <com.e510.commons.view.SquareRelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:layout_weight="1"
+        android:layout_marginLeft="20dp"
+        android:id="@+id/select_right">
+
+        <com.e510.commons.view.CircleImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:civ_circle_background_color="@android:color/white"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/select_right_img"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:src="@drawable/vehicle_car"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHeight_percent=".5"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent=".5" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.e510.commons.view.SquareRelativeLayout>
+
+</LinearLayout>

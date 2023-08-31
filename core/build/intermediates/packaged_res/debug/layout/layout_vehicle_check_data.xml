@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <es.incidence.core.utils.view.IField
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:id="@+id/txtMatricula"/>
+
+    <es.incidence.core.utils.view.IField
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtMatriculaYear"
+        android:layout_marginTop="10dp"/>
+
+    <es.incidence.core.utils.view.IField
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtMarca"
+        android:layout_marginTop="10dp"/>
+
+    <es.incidence.core.utils.view.IField
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtModelo"
+        android:layout_marginTop="10dp"/>
+
+</LinearLayout>

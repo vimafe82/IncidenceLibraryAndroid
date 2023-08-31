@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/layoutProgress"
+        android:layout_marginLeft="@dimen/margin_normal"
+        android:layout_marginRight="@dimen/margin_normal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minHeight="62dp"
+        android:weightSum="2">
+
+        <View
+            android:id="@+id/progressUp"
+            android:layout_width="2dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@color/incidence500"
+            android:layout_gravity="center"/>
+
+        <com.e510.commons.view.CircleImageView
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:layout_gravity="center"
+            app:civ_circle_background_color="@color/incidence500"
+            android:id="@+id/progressCircle"/>
+
+        <View
+            android:id="@+id/progressDown"
+            android:layout_width="2dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@color/incidence500"
+            android:layout_gravity="center"/>
+
+    </LinearLayout>
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/layoutProgress"
+        android:layout_marginRight="@dimen/margin_normal">
+
+        <TextView
+            android:id="@+id/txtTitle"
+            android:includeFontPadding="false"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="@string/name"
+            android:textColor="@color/black600"
+            android:textSize="16sp"
+            android:lineHeight="26dp"/>
+
+        <TextView
+            android:id="@+id/txtSubtitle"
+            android:includeFontPadding="false"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtTitle"
+            android:layout_marginTop="@dimen/margin_normal"
+            android:text="@string/name"
+            android:textColor="@color/black400"
+            android:textSize="12sp"
+            android:lineHeight="22dp"/>
+
+    </RelativeLayout>
+
+
+
+</RelativeLayout>

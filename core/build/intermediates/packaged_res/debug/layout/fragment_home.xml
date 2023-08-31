@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:clickable="true"
+    android:background="@color/incidence100"
+    android:id="@+id/layoutRootHome">
+
+    <ImageView
+        android:id="@+id/imgHamburger"
+        android:layout_marginTop="24dp"
+        android:layout_marginRight="@dimen/margin_normal"
+        android:layout_alignParentRight="true"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/icon_hamburger" />
+
+    <View
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_alignParentRight="true"
+        android:id="@+id/imgHamburgerClick" />
+
+    <TextView
+        android:layout_marginTop="24dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_normal"
+        android:layout_marginRight="@dimen/margin_normal"
+        android:text="@string/empty"
+        android:textColor="@color/black500"
+        android:textSize="12sp"
+        android:lineHeight="22dp"
+        android:id="@+id/homeTitleSmall"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginLeft="@dimen/margin_normal"
+        android:layout_marginRight="@dimen/margin_normal"
+        android:text="@string/empty"
+        android:textColor="@color/black600"
+        android:textSize="20sp"
+        android:lineHeight="30dp"
+        android:id="@+id/homeTitleBig"
+        android:layout_below="@+id/homeTitleSmall"/>
+
+    <FrameLayout
+        android:id="@+id/frame_card_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/homeTitleBig"
+        android:layout_marginTop="@dimen/margin_normal"
+        android:layout_marginLeft="@dimen/margin_normal"
+        android:layout_marginRight="@dimen/margin_normal"
+        >
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_view"
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            card_view:cardCornerRadius="8dp">
+
+            <com.mapbox.mapboxsdk.maps.MapView
+                android:id="@+id/mapView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clickable="true"
+                android:background="@android:color/transparent"
+                android:id="@+id/layoutMapClicable"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/layoutLocationDisabled"
+                android:visibility="gone">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/incidence500"
+                    android:alpha="0.8"/>
+                <TextView
+                    android:id="@+id/txtLocationDisabled"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/location_disabled_click_to_activate"
+                    android:textColor="@android:color/white"
+                    android:textSize="14sp"
+                    android:lineHeight="24dp"
+                    android:gravity="center"/>
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </FrameLayout>
+
+    <include layout="@layout/layout_alert_volumen" android:visibility="gone"/>
+
+    <RelativeLayout
+        android:id="@+id/layoutBottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-110dp"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/white">
+
+        <include
+            android:id="@+id/layoutVehicle"
+            layout="@layout/row_vehicle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_normal"
+            android:layout_marginTop="50dp"
+            android:layout_marginRight="@dimen/margin_normal"
+            android:visibility="invisible" />
+
+
+    </RelativeLayout>
+
+    <es.incidence.core.utils.FolderListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/layoutBottom"
+        android:layout_below="@+id/frame_card_view"
+        android:layout_marginBottom="110dp"
+        android:clipToPadding="false"
+        android:descendantFocusability="afterDescendants"
+        android:divider="@null"
+        android:dividerHeight="0dp"
+        android:listSelector="@android:color/transparent"
+        android:paddingTop="@dimen/margin_normal_medium"
+        android:paddingBottom="80dp">
+
+    </es.incidence.core.utils.FolderListView>
+
+    <ImageView
+        android:id="@+id/homeCircle"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:layout_above="@+id/layoutBottom"
+        android:layout_centerHorizontal="true"
+        android:adjustViewBounds="true" />
+
+
+    <ImageView
+        android:id="@+id/microButton"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_alignBottom="@+id/homeCircle"
+        android:layout_marginStart="0dp"
+        android:layout_marginBottom="68dp"
+        android:layout_toEndOf="@+id/homeCircle"
+        card_view:srcCompat="@drawable/ic_home_mircro_off" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_above="@id/layoutBottom"
+        android:id="@+id/viewHack"
+        android:clickable="true"/>
+
+    <ImageView
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:src="@drawable/incidence_active"
+        android:layout_alignParentRight="true"
+        android:adjustViewBounds="true"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/imgIncidenceActive"
+        android:visibility="gone"/>
+
+    <com.e510.commons.view.Hud
+        android:id="@+id/hud"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</RelativeLayout>

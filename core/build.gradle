@@ -1,0 +1,122 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 33
+
+
+    defaultConfig {
+        minSdkVersion 23
+        targetSdkVersion 33
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    lint {
+        abortOnError false
+        checkReleaseBuilds false
+    }
+    namespace 'es.incidence.core'
+}
+
+repositories{
+    flatDir{
+        dirs 'libs'
+    }
+}
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    //implementation files('libs/YouTubeAndroidPlayerApi.jar')
+    implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:12.1.0'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
+
+    //implementation(name:'commons-release', ext:'aar')
+    api files('libs/commons-release.aar')
+    api 'org.greenrobot:eventbus:3.3.1'
+    implementation 'net.yslibrary.keyboardvisibilityevent:keyboardvisibilityevent:3.0.0-RC2'
+    implementation 'com.google.code.gson:gson:2.10'
+    api "com.github.JakeWharton:ViewPagerIndicator:2.4.1"
+    implementation 'org.michaelbel:bottomsheet:1.2.3'
+
+    //implementation project(":commons")
+
+    //implementation(name:'location-release', ext:'aar')
+    api files('libs/location-release.aar')
+    implementation 'com.google.android.gms:play-services-location:17.0.0'
+
+    //implementation(name:'networking-release', ext:'aar')
+    api files('libs/networking-release.aar')
+    implementation "com.amitshekhar.android:jackson-android-networking:1.0.2"
+
+    //implementation(name:'firebase-release', ext:'aar')
+    //api files('libs/firebase-release.aar')
+    // Import the BoM for the Firebase platform
+
+    implementation platform('com.google.firebase:firebase-bom:31.2.1')
+    implementation 'com.google.firebase:firebase-messaging'
+
+
+    implementation "androidx.percentlayout:percentlayout:1.0.0"
+
+    //Sentry
+    implementation 'io.sentry:sentry-android:6.20.0'
+
+    //Segment analytics
+    implementation 'com.segment.analytics.android:analytics:4.11.3'
+
+    //menu
+    implementation 'com.czerwii:SlidingdrawerMenu:1.0.1'
+
+    //MapBox
+    implementation 'com.mapbox.mapboxsdk:mapbox-android-sdk:9.2.1'
+    implementation 'com.mapbox.mapboxsdk:mapbox-sdk-services:5.8.0'
+    implementation "com.mapbox.search:mapbox-search-android-ui:1.0.0-beta.20"
+    implementation "androidx.cardview:cardview:1.0.0"
+
+    //Tooltip
+    implementation 'com.github.douglasjunior:android-simple-tooltip:1.0.0-rc.0'
+
+    //Beacons
+    implementation 'org.altbeacon:android-beacon-library:2.19.5'
+
+    //Imagenes
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+
+
+    // Replace bundled strings dynamically
+    implementation 'dev.b3nedikt.restring:restring:5.1.2'
+
+    // Intercept view inflation
+    implementation 'dev.b3nedikt.viewpump:viewpump:4.0.7'
+
+    // Allows to update the text of views at runtime without recreating the activity
+    implementation 'dev.b3nedikt.reword:reword:4.0.1'
+
+    //Android Auto
+    implementation "androidx.car.app:app:1.2.0"
+    //implementation "androidx.car.app:app:1.0.0-beta01"
+
+    //QR DataMatrix Scanner
+    implementation 'com.github.yuriy-budiyev:code-scanner:2.1.2'
+
+    //implementation 'com.github.sachinvarma:Speech-Recognizer:0.0.1'
+
+    // https://mvnrepository.com/artifact/androidx.work/work-runtime-ktx
+    runtimeOnly group: 'androidx.work', name: 'work-runtime-ktx', version: '2.8.1'
+}

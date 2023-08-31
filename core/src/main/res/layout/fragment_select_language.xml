@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:clickable="true"
+    android:id="@+id/layoutRootSelLanguage"
+    android:background="@color/incidencePrincipal">
+
+    <include layout="@layout/layout_menu_ellipse"
+        android:layout_width="114dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/menuEllipseLayout"
+        android:layout_alignParentRight="true"/>
+
+
+
+
+    <RelativeLayout
+        android:layout_below="@+id/menuEllipseLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true">
+
+
+        <ScrollView
+            android:layout_marginTop="@dimen/margin_normal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_normal"
+                android:layout_marginRight="@dimen/margin_normal"
+                android:background="@color/incidencePrincipal">
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:layout_marginTop="@dimen/margin_normal"
+                    android:id="@+id/menuRowLanguageSpanish">
+
+                    <ImageView
+                        android:layout_marginLeft="@dimen/margin_normal"
+                        android:layout_width="24dp"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/flag_es"
+                        android:id="@+id/menuRowLanguageImgLeft"
+                        android:layout_centerVertical="true"/>
+
+                    <TextView
+                        android:layout_toRightOf="@+id/menuRowLanguageImgLeft"
+                        android:layout_centerVertical="true"
+                        android:id="@+id/menuRowLanguageTxtTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/lang_spanish"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp"
+                        android:lineHeight="26dp"
+                        android:layout_marginLeft="@dimen/margin_normal"
+                        android:layout_marginRight="@dimen/margin_normal"/>
+
+                </RelativeLayout>
+
+
+                <View
+                    android:id="@+id/line"
+                    android:layout_marginTop="@dimen/margin_normal_medium"
+                    android:layout_marginBottom="@dimen/margin_normal_medium"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/white" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:id="@+id/menuRowLanguageEnglish">
+
+                    <ImageView
+                        android:layout_marginLeft="@dimen/margin_normal"
+                        android:layout_width="24dp"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/flag_en"
+                        android:id="@+id/menuRowLanguageImgLeft2"
+                        android:layout_centerVertical="true"/>
+
+                    <TextView
+                        android:layout_toRightOf="@+id/menuRowLanguageImgLeft2"
+                        android:layout_centerVertical="true"
+                        android:id="@+id/menuRowLanguageTxtTitle2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/lang_english"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp"
+                        android:lineHeight="26dp"
+                        android:layout_marginLeft="@dimen/margin_normal"
+                        android:layout_marginRight="@dimen/margin_normal"/>
+
+                </RelativeLayout>
+
+
+
+            </LinearLayout>
+
+        </ScrollView>
+
+
+    </RelativeLayout>
+
+
+
+</RelativeLayout>

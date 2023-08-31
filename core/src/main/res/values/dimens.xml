@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margin_normal">24dp</dimen>
+    <dimen name="margin_normal_medium">12dp</dimen>
+    <dimen name="margin_normal_double">48dp</dimen>
+    <dimen name="margin_normal_triple">72dp</dimen>
+    <dimen name="button_height">64dp</dimen>
+    <dimen name="textfield_height">64dp</dimen>
+    <dimen name="margin_field">16dp</dimen>
+</resources>
