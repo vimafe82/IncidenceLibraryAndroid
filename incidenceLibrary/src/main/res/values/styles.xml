@@ -98,5 +98,15 @@
         <item name="colorAccent">@android:color/white</item>
     </style>
 
-    <declare-styleable name="CirclePageIndicator"><attr name="centered"/><attr format="color" name="fillColor"/><attr format="color" name="pageColor"/><attr name="android:orientation"/><attr format="dimension" name="radius"/><attr format="boolean" name="snap"/><attr format="color" name="strokeColor"/><attr name="strokeWidth"/><attr name="android:background"/></declare-styleable>
+    <declare-styleable name="ICirclePageIndicator">
+        <attr name="centered"/>
+        <attr format="color" name="fillColor"/>
+        <attr format="color" name="pageColor"/>
+        <attr name="android:orientation"/>
+        <!--<attr format="dimension" name="radius"/>-->
+        <attr format="boolean" name="snap"/>
+        <attr format="color" name="strokeColor"/>
+        <attr name="strokeWidth"/>
+        <attr name="android:background"/>
+    </declare-styleable>
 </resources>

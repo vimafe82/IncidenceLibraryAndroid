@@ -162,7 +162,7 @@ afterEvaluate {
                 from components.release
                 groupId = 'com.github.vimafe82'
                 artifactId = 'IncidenceLibraryAndroid'
-                version = "0.0.10"
+                version = "0.0.11"
             }
         }
     }
