@@ -2,8 +2,8 @@ package com.e510.incidencelibraryandroid;
 
 import android.app.Application;
 
-import com.e510.incidencelibrary.IncidenceLibraryManager;
-import com.e510.incidencelibrary.config.IncidenceLibraryConfig;
+import es.incidence.library.IncidenceLibraryManager;
+import es.incidence.library.config.IncidenceLibraryConfig;
 
 public class IApplication extends Application {
     @Override
