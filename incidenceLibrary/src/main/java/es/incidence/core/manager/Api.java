@@ -35,6 +35,8 @@ public class Api
     private static final String TAG = "Api";
 
     private static final String HEADER_DEVICE_ID = "deviceId";
+
+    private static final String HEADER_API_KEY = "apiKey";
     private static final String HEADER_APP = "app";
     private static final String HEADER_LANG = "lang";
     private static final String HEADER_TOKEN = "token";
@@ -46,7 +48,7 @@ public class Api
         return Core.loadData(Constants.KEY_USER_TOKEN);
     }
 
-    public static void init(Context context)
+    public static void init(Context context, String apikey)
     {
         Networking.init(context, false);
 
@@ -56,6 +58,7 @@ public class Api
             Networking.setBasicHeader(HEADER_TOKEN, token);
         }
         Device d = DeviceUtils.getDevice(context);
+        Networking.setBasicHeader(HEADER_API_KEY, apikey);
         //Networking.setBasicHeader(HEADER_APP, d.getPackageName());
         Networking.setBasicHeader(HEADER_APP, "es.incidence.app.test");
         Networking.setBasicHeader(HEADER_LANG, Core.getLanguage());
@@ -64,6 +67,9 @@ public class Api
         String deviceId = Core.loadData(Constants.KEY_DEVICE_ID);
         if (deviceId != null)
             Networking.setBasicHeader(HEADER_DEVICE_ID, deviceId);
+
+        Networking.setBasicHeader(HEADER_TOKEN, "d13e45b2096538153e529d63db3f0665");
+        Networking.setBasicHeader(HEADER_DEVICE_ID, "9424");
 
         Networking.addNetworkingListener(new NetWorkingListener() {
             @Override

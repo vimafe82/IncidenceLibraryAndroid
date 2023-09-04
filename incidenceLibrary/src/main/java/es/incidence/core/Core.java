@@ -66,12 +66,12 @@ public class Core {
     }
 
     //public static void init(BaseApplication app) {
-    public static void init(Application app) {
+    public static void init(Application app, String apikey) {
         application = app;
-        prepareConfigs();
+        prepareConfigs(apikey);
     }
 
-    private static void prepareConfigs() {
+    private static void prepareConfigs(String apikey) {
         if (BuildConfig.DEBUG) {
             LogUtil.config("", true);
         }
@@ -99,7 +99,7 @@ public class Core {
         //Firebase.init(application);
 
         //Api Networking
-        Api.init(application);
+        Api.init(application, apikey);
     }
 
     public static void signOut() {

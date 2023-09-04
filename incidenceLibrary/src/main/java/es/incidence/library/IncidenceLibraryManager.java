@@ -41,7 +41,7 @@ public class IncidenceLibraryManager {
         if (instance == null) {
             instance = new IncidenceLibraryManager(context, incidenceLibraryConfig);
 
-            Core.init(context);
+            Core.init(context, incidenceLibraryConfig.getApikey());
         }
 
         instance.validateApiKey();
@@ -86,7 +86,7 @@ public class IncidenceLibraryManager {
 
             Intent intent = new Intent(context, SimpleMainActivity.class);
             Bundle b = new Bundle();
-            b.putString("scree", Constants.SCREEN_DEVICE_LIST);
+            b.putString("screen", Constants.SCREEN_DEVICE_LIST);
             intent.putExtras(b);
             return intent;
         } else {

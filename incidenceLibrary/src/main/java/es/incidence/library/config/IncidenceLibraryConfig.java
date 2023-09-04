@@ -7,6 +7,10 @@ public class IncidenceLibraryConfig {
         this.apikey = apikeyLoc;
     }
 
+    public String getApikey() {
+        return apikey;
+    }
+
     public static class Builder {
         private String apikey;
 
