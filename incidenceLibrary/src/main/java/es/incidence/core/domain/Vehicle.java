@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 public class Vehicle implements Parcelable {
     public String id;
+    public String externalVehicleId;
     public String licensePlate;
     public String registrationYear;
     public String brand;
@@ -30,6 +31,7 @@ public class Vehicle implements Parcelable {
     public Vehicle(Vehicle v)
     {
         this.id = v.id;
+        this.externalVehicleId = externalVehicleId;
         this.licensePlate = v.licensePlate;
         this.registrationYear = v.registrationYear;
         this.brand = v.brand;
@@ -46,10 +48,13 @@ public class Vehicle implements Parcelable {
 
     protected Vehicle(Parcel in) {
         id = in.readString();
+        externalVehicleId = in.readString();
         licensePlate = in.readString();
         registrationYear = in.readString();
         brand = in.readString();
         model = in.readString();
+        vehicleType = in.readParcelable(VehicleType.class.getClassLoader());
+        color = in.readParcelable(ColorType.class.getClassLoader());
         policy = in.readParcelable(Policy.class.getClassLoader());
         insurance = in.readParcelable(Insurance.class.getClassLoader());
         beacon = in.readParcelable(Beacon.class.getClassLoader());
@@ -61,10 +66,13 @@ public class Vehicle implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(id);
+        dest.writeString(externalVehicleId);
         dest.writeString(licensePlate);
         dest.writeString(registrationYear);
         dest.writeString(brand);
         dest.writeString(model);
+        dest.writeParcelable(vehicleType, flags);
+        dest.writeParcelable(color, flags);
         dest.writeParcelable(policy, flags);
         dest.writeParcelable(insurance, flags);
         dest.writeParcelable(beacon, flags);

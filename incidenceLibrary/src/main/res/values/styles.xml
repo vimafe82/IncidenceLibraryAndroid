@@ -98,4 +98,8 @@
         <attr format="dimension" name="swipeButtonHeight"/>
     </declare-styleable>
 
+    <style name="ContentLoadingProgress">
+        <item name="colorAccent">@color/colorPrimary</item>
+    </style>
+
 </resources>

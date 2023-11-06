@@ -81,7 +81,6 @@ public class SignUpFragment extends IFragment
     //fields beacon
     public static final int ID_BEACON_SELECT_TYPE = 3001;
     public static final int ID_BEACON_POWER = 3002;
-    public static final int ID_BEACON_SELECT_VEHICLE = 3003;
 
     @Override
     public int getTitleId() {

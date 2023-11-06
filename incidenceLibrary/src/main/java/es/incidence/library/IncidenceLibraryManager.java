@@ -12,9 +12,13 @@ import java.util.List;
 import es.incidence.core.Constants;
 import es.incidence.core.Core;
 import es.incidence.core.activity.SimpleMainActivity;
+import es.incidence.core.domain.Incidence;
+import es.incidence.core.domain.User;
+import es.incidence.core.domain.Vehicle;
 import es.incidence.core.manager.Api;
 import es.incidence.core.manager.IRequestListener;
 import es.incidence.core.manager.IResponse;
+import es.incidence.core.manager.beacon.BeaconManager;
 import es.incidence.library.config.IncidenceLibraryConfig;
 
 public class IncidenceLibraryManager {
@@ -41,7 +45,8 @@ public class IncidenceLibraryManager {
         if (instance == null) {
             instance = new IncidenceLibraryManager(context, incidenceLibraryConfig);
 
-            Core.init(context, incidenceLibraryConfig.getApikey());
+            BeaconManager.init(context);
+            Core.init(context, incidenceLibraryConfig.getApikey(), incidenceLibraryConfig.getEnvironment());
         }
 
         instance.validateApiKey();
@@ -56,8 +61,17 @@ public class IncidenceLibraryManager {
                 {
                     instance.validApiKey = true;
 
-                    instance.screens.add(Constants.SCREEN_DEVELOPER);
-                    instance.screens.add(Constants.SCREEN_DEVICE_LIST);
+                    screens = response.getList("functionalities", String.class);
+                    instance.screens.add(Constants.SCREEN_DEVICE_CREATE);
+                    instance.screens.add(Constants.SCREEN_ECOMMERCE);
+                    instance.screens.add(Constants.FUNC_CLOSE_INC);
+                    //insurance = (Insurance) response.get("insurance", Insurance.class);
+
+                    //instance.screens.add(Constants.SCREEN_DEVELOPER);
+                    //instance.screens.add(Constants.SCREEN_DEVICE_LIST);
+
+                    Core.registerDeviceSdk();
+
                 } else {
                     instance.validApiKey = false;
                 }
@@ -77,21 +91,76 @@ public class IncidenceLibraryManager {
         }
     }
 
+    public boolean haveBeacon() {
+        int numVehicles = Core.getVehicles().size();
+        return numVehicles != 0;
+    }
+
     public Intent getDeviceListViewController() {
         String res = validateScreen(Constants.SCREEN_DEVICE_LIST);
         if (res == SCREEN_OK) {
-            //let viewModel = DeviceListViewModel()
-            //let viewController = DeviceListViewController.create(with: viewModel)
-            //return viewController
+            return createIntent(Constants.SCREEN_DEVICE_LIST);
+        } else {
+            return processScreenError(res);
+        }
+    }
 
-            Intent intent = new Intent(context, SimpleMainActivity.class);
-            Bundle b = new Bundle();
-            b.putString("screen", Constants.SCREEN_DEVICE_LIST);
-            intent.putExtras(b);
+    public Intent getDeviceCreateViewController(User user, Vehicle vehicle) {
+        String res = validateScreen(Constants.SCREEN_DEVICE_CREATE);
+        if (res == SCREEN_OK) {
+            Intent intent = createIntent(Constants.SCREEN_DEVICE_CREATE);
+            intent.putExtra("user", user);
+            intent.putExtra("vehicle", vehicle);
             return intent;
         } else {
             return processScreenError(res);
         }
+    }
+
+    public Intent getIncidenceCreateViewController(User user, Vehicle vehicle, Incidence incidence) {
+        String res = validateScreen(Constants.FUNC_REPOR_INC);
+        if (res == SCREEN_OK) {
+            Intent intent = createIntent(Constants.FUNC_REPOR_INC);
+            intent.putExtra("user", user);
+            intent.putExtra("vehicle", vehicle);
+            intent.putExtra("incidence", incidence);
+            return intent;
+        } else {
+            return processScreenError(res);
+        }
+    }
+
+    public Intent getIncidenceCloseViewController(User user, Vehicle vehicle, Incidence incidence) {
+        String res = validateScreen(Constants.FUNC_CLOSE_INC);
+        if (res == SCREEN_OK) {
+            Intent intent = createIntent(Constants.FUNC_CLOSE_INC);
+            intent.putExtra("user", user);
+            intent.putExtra("vehicle", vehicle);
+            intent.putExtra("incidence", incidence);
+            return intent;
+        } else {
+            return processScreenError(res);
+        }
+    }
+
+    public Intent getEcommerceViewController(User user, Vehicle vehicle) {
+        String res = validateScreen(Constants.SCREEN_ECOMMERCE);
+        if (res == SCREEN_OK) {
+            Intent intent = createIntent(Constants.SCREEN_ECOMMERCE);
+            intent.putExtra("user", user);
+            intent.putExtra("vehicle", vehicle);
+            return intent;
+        } else {
+            return processScreenError(res);
+        }
+    }
+
+    private Intent createIntent(String screenDeviceList) {
+        Intent intent = new Intent(context, SimpleMainActivity.class);
+        Bundle b = new Bundle();
+        b.putString("screen", screenDeviceList);
+        intent.putExtras(b);
+        return intent;
     }
 
     private Intent processScreenError(String error) {

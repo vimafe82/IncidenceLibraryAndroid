@@ -1,6 +1,7 @@
 package es.incidence.core;
 
-import android.content.Context;
+
+import es.incidence.library.config.Environment;
 
 public class Constants
 {
@@ -10,24 +11,29 @@ public class Constants
     public static String BASE_URL = "";
 
     public static final String SCREEN_DEVELOPER = "DEVELOPER";
-    public static final String SCREEN_DEVICE_LIST = "DEVICE_LIST";
+    public static final String SCREEN_DEVICE_LIST = "SCREEN_DEVICE_LIST";
+    public static final String SCREEN_DEVICE_CREATE = "SCREEN_DEVICE_CREATE";
+    public static final String SCREEN_DEVICE_DELETE = "SCREEN_DEVICE_DELETE";
+
+    public static final String SCREEN_ECOMMERCE = "SCREEN_ECOMMERCE";
+    public static final String FUNC_REPOR_INC = "FUNC_REPOR_INC";
+
+    public static final String FUNC_CLOSE_INC = "FUNC_CLOSE_INC";
     public static final String SCREEN_ERROR = "ERROR";
 
-    public static void setBaseUrl(Context context)
+    public static void setBaseUrl(Environment environment)
     {
-        if (context.getPackageName().equals("es.incidence.app.test"))
+        if (environment == Environment.TEST)
         {
             BASE_URL = BASE_URL_TEST;
         }
-        else if (context.getPackageName().equals("es.incidence.app.pre"))
+        else if (environment == Environment.PRE)
         {
             BASE_URL = BASE_URL_PRE;
         }
-        else if (context.getPackageName().equals("es.incidence.app"))
+        else if (environment == Environment.PRO)
         {
             BASE_URL = BASE_URL_PRO;
-        } else {
-            BASE_URL = BASE_URL_TEST;
         }
     }
 

@@ -15,9 +15,11 @@ public class Policy implements Parcelable {
 
     public Policy() {}
 
+
     protected Policy(Parcel in) {
         id = in.readString();
         policyNumber = in.readString();
+        identityType = in.readParcelable(IdentityType.class.getClassLoader());
         dni = in.readString();
         policyStart = in.readString();
         policyEnd = in.readString();
@@ -27,6 +29,7 @@ public class Policy implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(id);
         dest.writeString(policyNumber);
+        dest.writeParcelable(identityType, flags);
         dest.writeString(dni);
         dest.writeString(policyStart);
         dest.writeString(policyEnd);

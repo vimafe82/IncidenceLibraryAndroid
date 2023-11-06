@@ -107,6 +107,13 @@
         android:background="@android:color/transparent"
         android:layout_alignParentTop="true"/>
 
+    <RelativeLayout
+        android:id="@+id/layout_popup"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:background="@android:color/transparent" />
+
     <com.e510.commons.view.Hud
         android:id="@+id/hud"
         android:layout_width="match_parent"

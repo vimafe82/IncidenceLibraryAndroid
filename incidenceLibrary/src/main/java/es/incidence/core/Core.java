@@ -16,6 +16,7 @@ import com.e510.commons.domain.Device;
 import com.e510.commons.utils.DeviceUtils;
 import com.e510.commons.utils.LogUtil;
 import com.e510.commons.utils.Prefs;
+import com.e510.commons.utils.config.AppConfiguration;
 import com.e510.incidencelibrary.BuildConfig;
 import com.e510.incidencelibrary.R;
 import com.e510.networking.Mapper;
@@ -41,6 +42,7 @@ import es.incidence.core.domain.User;
 import es.incidence.core.domain.Vehicle;
 import es.incidence.core.domain.VehicleType;
 import es.incidence.core.manager.Api;
+import es.incidence.library.config.Environment;
 //import es.incidence.core.manager.beacon.BeaconManager;
 //import es.incidence.core.manager.beacon.BeaconService;
 //import io.sentry.Sentry;
@@ -66,17 +68,17 @@ public class Core {
     }
 
     //public static void init(BaseApplication app) {
-    public static void init(Application app, String apikey) {
+    public static void init(Application app, String apikey, Environment environment) {
         application = app;
-        prepareConfigs(apikey);
+        prepareConfigs(apikey, environment);
     }
 
-    private static void prepareConfigs(String apikey) {
+    private static void prepareConfigs(String apikey, Environment environment) {
         if (BuildConfig.DEBUG) {
             LogUtil.config("", true);
         }
 
-        Constants.setBaseUrl(application);
+        Constants.setBaseUrl(environment);
 
         //JSON Config
         /*
@@ -93,8 +95,9 @@ public class Core {
                 });
             }
         };
-        AppConfiguration.init(application, appConfigurationListener);
         */
+        AppConfiguration.init(application, null);
+
         //Firebase
         //Firebase.init(application);
 
@@ -138,9 +141,12 @@ public class Core {
         Api.updateLang();
     }
     public static void registerDevice() {
-        registerDevice(true);
+        registerDevice(true, false);
     }
-    public static void registerDevice(boolean checkToken) {
+    public static void registerDeviceSdk() {
+        registerDevice(true, true);
+    }
+    public static void registerDevice(boolean checkToken, boolean sdk) {
         Device d = DeviceUtils.getDevice(application);
 
         IDevice device = new IDevice();
@@ -161,13 +167,15 @@ public class Core {
                 public void run()
                 {
                     //if (!BaseApplication.INSTANCE.isApplicationOnBackground())
-                        registerDevice(false);
+                        registerDevice(false, sdk);
                 }
             }, 4000);
         }
 
-        if (checkToken || (!checkToken && device.token != null))
-            Api.updateDevice(null, device);
+        if (checkToken || (!checkToken && device.token != null)) {
+            if (sdk) Api.updateDeviceSdk(null, device);
+            else Api.updateDevice(null, device);
+        }
     }
 
     public static void getGeneralData() {

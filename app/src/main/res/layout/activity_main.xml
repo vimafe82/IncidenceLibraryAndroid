@@ -5,23 +5,69 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:padding="@dimen/activity_horizontal_margin">
 
     <TextView
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:text="Incidence Demo APp"
         android:textAlignment="center"
          />
 
-    <Button
+    <!--<Button
         android:id="@+id/btnDeviceList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/activity_horizontal_margin"
         android:text="Device List"
         app:layout_constraintBottom_toBottomOf="@+id/title"
+        />-->
+
+    <Button
+        android:id="@+id/btnDeviceCreate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:text="Device Create"
+        app:layout_constraintBottom_toBottomOf="@+id/title"
+        />
+
+    <Button
+        android:id="@+id/btnDeviceDelete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:text="Device Delete"
+        app:layout_constraintBottom_toBottomOf="@+id/btnDeviceCreate"
+        />
+
+    <Button
+        android:id="@+id/btnIncidenceCreate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:text="Incidence Create"
+        app:layout_constraintBottom_toBottomOf="@+id/btnDeviceDelete"
+        />
+
+    <Button
+        android:id="@+id/btnIncidenceClose"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:text="Incidence Close"
+        app:layout_constraintBottom_toBottomOf="@+id/btnIncidenceCreate"
+        />
+
+    <Button
+        android:id="@+id/btnEcommerce"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:text="Ecommerce"
+        app:layout_constraintBottom_toBottomOf="@+id/btnIncidenceClose"
         />
 
 </LinearLayout>

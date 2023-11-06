@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public class Incidence implements Parcelable
 {
     public Integer id;
+    public String externalIncidenceId;
     public String street;
     public String city;
     public String country;
@@ -29,12 +30,14 @@ public class Incidence implements Parcelable
 
     public Incidence(){}
 
+
     protected Incidence(Parcel in) {
         if (in.readByte() == 0) {
             id = null;
         } else {
             id = in.readInt();
         }
+        externalIncidenceId = in.readString();
         street = in.readString();
         city = in.readString();
         country = in.readString();
@@ -49,6 +52,7 @@ public class Incidence implements Parcelable
         } else {
             longitude = in.readDouble();
         }
+        incidenceType = in.readParcelable(IncidenceType.class.getClassLoader());
         openApp = in.readParcelable(OpenApp.class.getClassLoader());
         androidAuto = in.readInt();
         status = in.readInt();
@@ -77,6 +81,7 @@ public class Incidence implements Parcelable
             dest.writeByte((byte) 1);
             dest.writeInt(id);
         }
+        dest.writeString(externalIncidenceId);
         dest.writeString(street);
         dest.writeString(city);
         dest.writeString(country);
@@ -93,6 +98,7 @@ public class Incidence implements Parcelable
             dest.writeByte((byte) 1);
             dest.writeDouble(longitude);
         }
+        dest.writeParcelable(incidenceType, flags);
         dest.writeParcelable(openApp, flags);
         dest.writeInt(androidAuto);
         dest.writeInt(status);
