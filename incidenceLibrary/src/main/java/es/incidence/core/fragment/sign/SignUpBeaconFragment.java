@@ -12,7 +12,6 @@ import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Looper;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -59,18 +58,18 @@ import es.incidence.core.entity.sign.SignStepType;
 import es.incidence.core.manager.Api;
 import es.incidence.core.manager.IRequestListener;
 import es.incidence.core.manager.IResponse;
-import es.incidence.core.manager.beacon.BeaconListener;
-import es.incidence.core.manager.beacon.BeaconManager;
 import es.incidence.core.utils.Tooltip;
 import es.incidence.core.utils.view.IButton;
 import es.incidence.core.utils.view.IField;
 import es.incidence.core.utils.view.INavigation;
 import es.incidence.core.utils.view.INotification;
+import es.incidence.library.IncidenceLibraryManager;
 
 public class SignUpBeaconFragment extends SignUpFragment {
     private static final String TAG = makeLogTag(SignUpBeaconFragment.class);
 
 
+    private RelativeLayout layoutRoot;
     private RelativeLayout layoutHeader;
     private ImageView imgBackground;
     private ImageView imgBeacon;
@@ -176,7 +175,6 @@ public class SignUpBeaconFragment extends SignUpFragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        stopScanBeacons();
     }
 
     @Override
@@ -197,6 +195,14 @@ public class SignUpBeaconFragment extends SignUpFragment {
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
         layoutSuccess.setLayoutParams(params);
         layoutSuccess.setVisibility(View.GONE);
+
+        layoutRoot = layoutSuccess.findViewById(R.id.layoutRoot);
+        IncidenceLibraryManager.instance.setViewBackground(layoutRoot);
+        //layoutRoot.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        //layoutRoot.setBackground(getColor(R.color.colorPrimary));
+        //layoutRoot.setBackgroundColor(getColor(R.color.colorPrimary));
+        //layoutRoot.setBackgroundResource(R.color.colorPrimary);
+
         RelativeLayout layoutHeader2 = layoutSuccess.findViewById(R.id.layoutHeader);
         layoutLoading = layoutSuccess.findViewById(R.id.layoutLoading);
         TextView txtOmitir2 = layoutSuccess.findViewById(R.id.txtOmitir);
@@ -428,7 +434,6 @@ public class SignUpBeaconFragment extends SignUpFragment {
             } else {
                 //showHud();
                 layoutLoading.setVisibility(View.VISIBLE);
-                scanBeacons();
             }
         } else {
             showLocationPopUp();
@@ -479,6 +484,12 @@ public class SignUpBeaconFragment extends SignUpFragment {
         LayoutInflater inflater = LayoutInflater.from(getContext());
         View view = inflater.inflate(R.layout.layout_beacon_select_type, null);
         FontUtils.setTypeValueText(view, Constants.FONT_REGULAR, getContext());
+
+        layoutRoot = view.findViewById(R.id.layoutRoot);
+        TextView txtHeaderVehicle = view.findViewById(R.id.txtHeaderVehicle);
+        TextView txtTitleHome = view.findViewById(R.id.txtTitle);
+        TextView txtTitle1Home = view.findViewById(R.id.txtTitle1);
+        TextView txtTitle12Home = view.findViewById(R.id.txtTitle12);
 
         View viewBluetoothContent = view.findViewById(R.id.line21);
         View viewQRContent = view.findViewById(R.id.line1);
@@ -584,6 +595,7 @@ public class SignUpBeaconFragment extends SignUpFragment {
         TextView txtTitle = popupContainer.findViewById(R.id.txtTitle);
         TextView txtSubTitle = popupContainer.findViewById(R.id.txtSubTitle);
         IField fieldImei = popupContainer.findViewById(R.id.fieldImei);
+        fieldImei.setText("869154040054509");
         RelativeLayout layoutRootIField = fieldImei.findViewById(R.id.layoutRoot);
         FloatEditText textInputLayout = fieldImei.findViewById(R.id.textInputLayout);
         IButton btnBlue = popupContainer.findViewById(R.id.btnBlue);
@@ -642,7 +654,6 @@ public class SignUpBeaconFragment extends SignUpFragment {
             public void onClick(View view) {
                 selectedBeacon = new Beacon();
                 selectedBeacon.uuid = fieldImei.getText();
-                selectedBeacon.uuid = "869154040054509";
                 //mListener.addFragmentAnimated(IncidenceReportFragment.newInstance(beacon.vehicle, beacon.vehicle, false));
                 layoutToShow.removeView(popupImei);
                 setBeaconToVehicle(autoSelectedUser, autoSelectedVehicle, selectedBeacon);
@@ -690,6 +701,12 @@ public class SignUpBeaconFragment extends SignUpFragment {
             }
         });
 
+        IncidenceLibraryManager.instance.setViewBackground(layoutRoot);
+        IncidenceLibraryManager.instance.setTextColor(txtHeaderVehicle);
+        IncidenceLibraryManager.instance.setTextColor(txtTitleHome);
+        IncidenceLibraryManager.instance.setTextColor(txtTitle1Home);
+        IncidenceLibraryManager.instance.setTextColor(txtTitle12Home);
+
         return view;
     }
 
@@ -705,6 +722,12 @@ public class SignUpBeaconFragment extends SignUpFragment {
         LayoutInflater inflater = LayoutInflater.from(getContext());
         View view = inflater.inflate(R.layout.layout_beacon_add, null);
         FontUtils.setTypeValueText(view, Constants.FONT_REGULAR, getContext());
+
+        layoutRoot = view.findViewById(R.id.layoutRoot);
+        //layoutRoot.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        //layoutRoot.setBackground(getColor(R.color.colorPrimary));
+        //layoutRoot.setBackgroundColor(getColor(R.color.colorPrimary));
+        layoutRoot.setBackgroundResource(R.color.colorPrimary);
 
         layoutLoading = view.findViewById(R.id.layoutLoading);
         layoutHeader = view.findViewById(R.id.layoutHeader);
@@ -722,7 +745,6 @@ public class SignUpBeaconFragment extends SignUpFragment {
                     //hideHud();
                     layoutLoading.setVisibility(View.GONE);
                     showNoBeaconsDetectedView();
-                    stopScanBeacons();
                 } else {
                     printNextBlock();
                 }
@@ -768,59 +790,6 @@ public class SignUpBeaconFragment extends SignUpFragment {
         return view;
     }
     */
-
-    private void scanBeacons() {
-        isScanning = true;
-
-        if (handlerScan != null) {
-            handlerScan.removeCallbacksAndMessages(null);
-        }
-
-        handlerScan = new Handler(Looper.getMainLooper());
-        handlerScan.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (currentView.equals(VIEW_SEARCH)) {
-                    //hideHud();
-                    layoutLoading.setVisibility(View.GONE);
-                    showNoBeaconsDetectedView();
-                    stopScanBeacons();
-                }
-            }
-        }, 20000);
-
-        BeaconManager.getInstance().bind(new BeaconListener() {
-            @Override
-            public void didEnterRegion(String region) {
-            }
-
-            @Override
-            public void onBeaconsDetected(ArrayList<Beacon> beacons) {
-                stopScanBeacons();
-                showBeaconsDetectedView();
-                //hideHud();
-                layoutLoading.setVisibility(View.GONE);
-
-                selectedBeacon = beacons.get(0);
-                imgBeacon.setVisibility(View.VISIBLE);
-                imgBeacon.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        setBeaconToVehicle(autoSelectedUser, autoSelectedVehicle, selectedBeacon);
-                    }
-                });
-            }
-        });
-    }
-
-    private void stopScanBeacons() {
-        if (handlerScan != null) {
-            handlerScan.removeCallbacksAndMessages(null);
-        }
-        BeaconManager.getInstance().unbind();
-
-        isScanning = false;
-    }
 
     private void onClickContinue() {
         if (currentView.equals(VIEW_ACTIVATE_BLUETOOTH)) {
@@ -947,14 +916,12 @@ public class SignUpBeaconFragment extends SignUpFragment {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 //showHud();
                 layoutLoading.setVisibility(View.VISIBLE);
-                scanBeacons();
             } else {
                 showAlert(R.string.app_name, R.string.alert_no_location_to_beacon, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         //showHud();
                         layoutLoading.setVisibility(View.VISIBLE);
-                        scanBeacons();
                     }
                 });
             }

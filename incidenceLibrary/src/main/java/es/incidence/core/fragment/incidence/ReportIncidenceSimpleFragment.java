@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 
 import androidx.annotation.Nullable;
 
@@ -22,6 +23,7 @@ import es.incidence.core.manager.Api;
 import es.incidence.core.manager.IRequestListener;
 import es.incidence.core.manager.IResponse;
 import es.incidence.core.utils.view.INavigation;
+import es.incidence.library.IncidenceLibraryManager;
 
 public class ReportIncidenceSimpleFragment extends IFragment
 {
@@ -91,6 +93,8 @@ public class ReportIncidenceSimpleFragment extends IFragment
         INavigation navigation = rootView.findViewById(R.id.inavigation);
         navigation.init(this, getString(getTitleId()), true);
 
+        RelativeLayout layoutRootReportIncidence = rootView.findViewById(R.id.layoutRootReportIncidence);
+
         btnCreate = rootView.findViewById(R.id.btnCreate);
         btnCreate.setText(getTitleId());
         //btnDeviceCreate.setPrimaryColors();
@@ -102,6 +106,7 @@ public class ReportIncidenceSimpleFragment extends IFragment
             }
         });
 
+        IncidenceLibraryManager.instance.setViewBackground(layoutRootReportIncidence);
     }
 
     private void onClickBlue() {

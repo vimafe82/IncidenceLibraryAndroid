@@ -165,6 +165,12 @@ public class Api
         params.put("appVersionNumber", device.appVersionNumber);
         params.put("response", "{}");
 
+        //params.put("external_user_id", "10001");
+        //params.put("phone", "600010001");
+
+        params.put("external_user_id", "15001");
+        params.put("phone", "650010001");
+
         JSONObjectRequestListener requestListener = new JSONObjectRequestListener() {
             @Override
             public void onResponse(JSONObject response)
@@ -1039,6 +1045,7 @@ public class Api
         params.put("policy_identity_type", String.valueOf(vehicle.policy.identityType.name)); // (tipo de documento identidad del asegurador)
         params.put("policy_dni", vehicle.policy.dni); // (documento de identidad del asegurador)
         params.put("imei", beacon.uuid); // (imei)
+        params.put("uuid", beacon.uuid); // (imei)
         //params.put("imei", "8473847394739847");
 
         JSONObjectRequestListener requestListener = getSimpleListener(viewListener);

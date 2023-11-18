@@ -2,7 +2,11 @@ package es.incidence.library;
 
 import android.app.Application;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 
 import com.e510.commons.activity.BaseActivity;
 
@@ -15,10 +19,10 @@ import es.incidence.core.activity.SimpleMainActivity;
 import es.incidence.core.domain.Incidence;
 import es.incidence.core.domain.User;
 import es.incidence.core.domain.Vehicle;
+import es.incidence.core.entity.AppConfig;
 import es.incidence.core.manager.Api;
 import es.incidence.core.manager.IRequestListener;
 import es.incidence.core.manager.IResponse;
-import es.incidence.core.manager.beacon.BeaconManager;
 import es.incidence.library.config.IncidenceLibraryConfig;
 
 public class IncidenceLibraryManager {
@@ -32,6 +36,7 @@ public class IncidenceLibraryManager {
     private Application context;
 
     private Boolean validApiKey = null;
+    private AppConfig appearance;
     private List<String> screens = new ArrayList<>();
     private ArrayList<BaseActivity> activities = new ArrayList<>();
     protected int stateCounter = 0;
@@ -45,7 +50,6 @@ public class IncidenceLibraryManager {
         if (instance == null) {
             instance = new IncidenceLibraryManager(context, incidenceLibraryConfig);
 
-            BeaconManager.init(context);
             Core.init(context, incidenceLibraryConfig.getApikey(), incidenceLibraryConfig.getEnvironment());
         }
 
@@ -69,6 +73,9 @@ public class IncidenceLibraryManager {
 
                     //instance.screens.add(Constants.SCREEN_DEVELOPER);
                     //instance.screens.add(Constants.SCREEN_DEVICE_LIST);
+
+                    appearance = (AppConfig) response.get("appearance", AppConfig.class);
+
 
                     Core.registerDeviceSdk();
 
@@ -219,4 +226,49 @@ public class IncidenceLibraryManager {
         return stateCounter;
     }
 
+    public void setViewBackground(View view) {
+        try {
+            if (appearance != null && appearance.background_color != null) {
+                int color = Color.parseColor(appearance.background_color);
+                view.setBackgroundColor(color);
+            }
+        } catch (Exception e) {
+            Log.e("", e.getMessage(), e);
+        }
+    }
+
+    public void setTextColor(TextView view) {
+        try {
+            if (appearance != null && appearance.letter_color != null) {
+                int color = Color.parseColor(appearance.letter_color);
+                view.setTextColor(color);
+            }
+        } catch (Exception e) {
+            Log.e("", e.getMessage(), e);
+        }
+    }
+
+    public Integer getTextColor() {
+        if (appearance != null && appearance.letter_color != null) {
+            int color = Color.parseColor(appearance.letter_color);
+            return color;
+        }
+        return null;
+    }
+
+    public Intent getBalizaInfoViewController(User user, Vehicle vehicle) {
+        return null;
+    }
+
+    public boolean deleteBalizaFunc(User user, Vehicle vehicle) {
+        return false;
+    }
+
+    public boolean createIncidenceFunc(User user, Vehicle vehicle, Incidence incidence) {
+        return  false;
+    }
+
+    public boolean closeIncidenceFunc(User user, Vehicle vehicle, Incidence incidence) {
+        return  false;
+    }
 }

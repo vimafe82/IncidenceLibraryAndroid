@@ -12,7 +12,7 @@
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Incidence Demo APp"
+        android:text="Incidence SDK Demo APP"
         android:textAlignment="center"
          />
 
@@ -30,7 +30,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/activity_horizontal_margin"
-        android:text="Device Create"
+        android:text="Vincular baliza"
         app:layout_constraintBottom_toBottomOf="@+id/title"
         />
 
@@ -39,7 +39,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/activity_horizontal_margin"
-        android:text="Device Delete"
+        android:text="Opciones de baliza"
         app:layout_constraintBottom_toBottomOf="@+id/btnDeviceCreate"
         />
 
@@ -48,7 +48,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/activity_horizontal_margin"
-        android:text="Incidence Create"
+        android:text="Crear incidencia"
         app:layout_constraintBottom_toBottomOf="@+id/btnDeviceDelete"
         />
 
@@ -57,7 +57,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/activity_horizontal_margin"
-        android:text="Incidence Close"
+        android:text="Cerrar incidencia"
         app:layout_constraintBottom_toBottomOf="@+id/btnIncidenceCreate"
         />
 

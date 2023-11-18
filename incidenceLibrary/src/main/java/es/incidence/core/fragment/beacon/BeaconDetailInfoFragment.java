@@ -108,13 +108,13 @@ public class BeaconDetailInfoFragment extends IFragment
         txtHeaderBeacon = rootView.findViewById(R.id.txtHeaderBeacon);
         imageBeacon = rootView.findViewById(R.id.imageBeacon);
 
-        if (beacon.beaconType.imageBeaconScreen1 != null) {
+        if (beacon.beaconType != null && beacon.beaconType.imageBeaconScreen1 != null) {
             ImageManager.loadImage(getContext(), beacon.beaconType.imageBeaconScreen1, null, imageBeacon, true);
         } else {
             imageBeacon.setImageResource(R.drawable.device_info_1);
         }
 
-        if (beacon.beaconType.textBeaconScreen1 != null) {
+        if (beacon.beaconType != null && beacon.beaconType.textBeaconScreen1 != null) {
             txtHeaderBeacon.setText(beacon.beaconType.textBeaconScreen1);
         } else {
             txtHeaderBeacon.setText(R.string.device_desc_info1);
@@ -124,13 +124,13 @@ public class BeaconDetailInfoFragment extends IFragment
     private void onClickBlue() {
 
         if (position == 0) {
-            if (beacon.beaconType.imageBeaconScreen2 != null) {
+            if (beacon.beaconType != null && beacon.beaconType.imageBeaconScreen2 != null) {
                 ImageManager.loadImage(getContext(), beacon.beaconType.imageBeaconScreen2, null, imageBeacon, true);
             } else {
                 imageBeacon.setImageResource(R.drawable.device_info_2);
             }
 
-            if (beacon.beaconType.textBeaconScreen2 != null) {
+            if (beacon.beaconType != null && beacon.beaconType.textBeaconScreen2 != null) {
                 txtHeaderBeacon.setText(beacon.beaconType.textBeaconScreen2);
             } else {
                 txtHeaderBeacon.setText(getString(R.string.device_desc_info2));
@@ -139,13 +139,13 @@ public class BeaconDetailInfoFragment extends IFragment
             position = 1;
 
         } else if (position == 1) {
-            if (beacon.beaconType.imageBeaconScreen3 != null) {
+            if (beacon.beaconType != null && beacon.beaconType.imageBeaconScreen3 != null) {
                 ImageManager.loadImage(getContext(), beacon.beaconType.imageBeaconScreen3, null, imageBeacon, true);
             } else {
                 imageBeacon.setImageResource(R.drawable.device_info_3);
             }
 
-            if (beacon.beaconType.textBeaconScreen3 != null) {
+            if (beacon.beaconType != null && beacon.beaconType.textBeaconScreen3 != null) {
                 txtHeaderBeacon.setText(beacon.beaconType.textBeaconScreen3);
             } else {
                 txtHeaderBeacon.setText(getString(R.string.device_desc_info3));

@@ -30,6 +30,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        String dni = "15111111T";
+        String phone = "650010001";
+        String externalUserId = "15001";
+        String externalVehicleId = "15001";
+        String licensePlate = "1511XXX";
+        String externalIncidenceId = "15001";
+
         IdentityType dniIdentityType = new IdentityType();
         dniIdentityType.name = "dni"; // (tipo de documento de identidad: dni, nie, cif)
 
@@ -40,24 +47,24 @@ public class MainActivity extends AppCompatActivity {
         color.name = "Rojo";
 
         Policy policy = new Policy();
-        policy.policyNumber = "127864736"; // (número de la póliza)
+        policy.policyNumber = "111111111"; // (número de la póliza)
         policy.policyEnd = "2024-10-09"; // (fecha caducidad de la póliza)
         policy.identityType = dniIdentityType; // (tipo de documento identidad del asegurador)
-        policy.dni = "00000000T"; // (documento de identidad del asegurador)
+        policy.dni = dni; // (documento de identidad del asegurador)
 
         User user = new User();
-        user.externalUserId = "10453"; // (identificador externo del usuario)
+        user.externalUserId = externalUserId; // (identificador externo del usuario)
         user.name = "Nombre TEST"; // (nombre del usuario)
-        user.phone = "600001001"; // (teléfono)
-        user.email = "sdkm@tridenia.com"; // (e-mail)
+        user.phone = phone; // (teléfono)
+        user.email = "sdkm1@tridenia.com"; // (e-mail)
         user.identityType = dniIdentityType;
-        user.dni = "87114879S"; // (número del documento de identidad)
+        user.dni = dni; // (número del documento de identidad)
         user.birthday = "1979-09-29"; // (fecha de Nacimiento)
         user.checkTerms = "1"; // (aceptación de la privacidad)
 
         Vehicle vehicle = new Vehicle();
-        vehicle.externalVehicleId = "10453";
-        vehicle.licensePlate = "0011XXX"; // (matrícula del vehículo)
+        vehicle.externalVehicleId = externalVehicleId;
+        vehicle.licensePlate = licensePlate; // (matrícula del vehículo)
         vehicle.registrationYear = "2022"; // (fecha de matriculación)
         vehicle.vehicleType = vehicleType; // (tipo del vehículo)
         vehicle.brand = "Seat"; // (marca del vehículo)
@@ -76,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         incidence.country = "España";
         incidence.latitude = 41.4435945;
         incidence.longitude = 2.2319534;
-        incidence.externalIncidenceId = "1010";
+        incidence.externalIncidenceId = externalIncidenceId;
 
         /*Button btnDeviceList = findViewById(R.id.btnDeviceList);
         btnDeviceList.setOnClickListener(new View.OnClickListener() {
@@ -120,6 +127,13 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent activity = IncidenceLibraryManager.instance.getIncidenceCloseViewController(user, vehicle, incidence);
                 startActivity(activity);
+
+
+                //Intent activity = IncidenceLibraryManager.instance.getBalizaInfoViewController(user, vehicle);
+                //startActivity(activity);
+
+                //boolean result = IncidenceLibraryManager.instance.closeIncidenceFunc(user, vehicle, incidence);
+
             }
         });
 

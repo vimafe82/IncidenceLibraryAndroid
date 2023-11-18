@@ -1,5 +1,7 @@
 package es.incidence.core.fragment.common;
 
+import static com.e510.commons.utils.LogUtil.makeLogTag;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -15,22 +17,22 @@ import androidx.annotation.Nullable;
 
 import com.e510.commons.utils.FontUtils;
 import com.e510.commons.utils.Utils;
+import com.e510.incidencelibrary.R;
 
 import java.util.ArrayList;
 
 import es.incidence.core.Constants;
-import com.e510.incidencelibrary.R;
 import es.incidence.core.adapter.ListAdapter;
 import es.incidence.core.entity.ListItem;
 import es.incidence.core.fragment.IFragment;
 import es.incidence.core.utils.view.INavigation;
-
-import static com.e510.commons.utils.LogUtil.makeLogTag;
+import es.incidence.library.IncidenceLibraryManager;
 
 public class ListFragment extends IFragment
 {
     private static final String TAG = makeLogTag(ListFragment.class);
 
+    private RelativeLayout layoutRootFragList;
     private RelativeLayout layoutNavRight;
     private TextView txtNavTitleRight;
     private ImageView imgNavTitleRight;
@@ -85,6 +87,7 @@ public class ListFragment extends IFragment
     public void setupUI(View rootView) {
         super.setupUI(rootView);
 
+        layoutRootFragList = rootView.findViewById(R.id.layoutRootFragList);
         layoutNavRight = rootView.findViewById(R.id.layoutNavRight);
         imgNavTitleRight = rootView.findViewById(R.id.imgNavTitleRight);
         txtNavTitleRight = rootView.findViewById(R.id.txtNavTitleRight);
@@ -109,6 +112,8 @@ public class ListFragment extends IFragment
         });
 
         layoutBottom = rootView.findViewById(R.id.layoutBottom);
+
+        IncidenceLibraryManager.instance.setViewBackground(layoutRootFragList);
     }
 
     @Override

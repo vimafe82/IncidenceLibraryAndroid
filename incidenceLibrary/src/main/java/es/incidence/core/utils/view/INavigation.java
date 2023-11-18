@@ -16,6 +16,7 @@ import com.e510.commons.utils.Utils;
 import com.e510.incidencelibrary.R;
 
 import es.incidence.core.Constants;
+import es.incidence.library.IncidenceLibraryManager;
 
 public class INavigation extends RelativeLayout
 {
@@ -64,6 +65,9 @@ public class INavigation extends RelativeLayout
         txtTitle.setText(R.string.create_account);
 
         FontUtils.setTypeValueText(txtTitle, Constants.FONT_SEMIBOLD, getContext());
+
+        IncidenceLibraryManager.instance.setViewBackground(layoutRoot);
+        IncidenceLibraryManager.instance.setTextColor(txtTitle);
 
         setBackHeight();
     }

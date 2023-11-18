@@ -93,7 +93,7 @@ public class BeaconDetailFragment extends IFragment
 
     private Integer battery;
     private String expirationDate;
-    private Integer dgt;
+    private Integer dgt = 0;
     public ArrayList<IncidenceDGT> items;
 
     private long secondsRemainingConfig = 90;

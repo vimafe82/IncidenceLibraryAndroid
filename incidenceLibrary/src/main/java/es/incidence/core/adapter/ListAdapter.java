@@ -30,6 +30,7 @@ import es.incidence.core.manager.ImageManager;
 import es.incidence.core.utils.Tooltip;
 import es.incidence.core.utils.view.IDropField;
 import es.incidence.core.utils.view.IField;
+import es.incidence.library.IncidenceLibraryManager;
 
 public class ListAdapter extends BaseAdapter
 {
@@ -171,8 +172,10 @@ public class ListAdapter extends BaseAdapter
             viewHolder.txtTitle = rowView.findViewById(R.id.txtTitle);
             viewHolder.txtSubtitle = rowView.findViewById(R.id.txtSubtitle);
             viewHolder.imgExclamation = rowView.findViewById(R.id.imgExclamation);
-            if (viewHolder.txtTitle != null)
+            if (viewHolder.txtTitle != null) {
                 FontUtils.setTypeValueText(viewHolder.txtTitle, Constants.FONT_REGULAR, fragment.getContext());
+                IncidenceLibraryManager.instance.setTextColor(viewHolder.txtTitle);
+            }
             if (viewHolder.txtSubtitle != null)
                 FontUtils.setTypeValueText(viewHolder.txtSubtitle, Constants.FONT_REGULAR, fragment.getContext());
 

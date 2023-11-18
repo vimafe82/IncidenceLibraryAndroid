@@ -37,6 +37,7 @@ public class BeaconListFragment extends ListFragment
     private ArrayList<Beacon> allBeacons = new ArrayList<>();
 
     private View addBeaconView;
+    private RelativeLayout layoutRoot;
 
     public static BeaconListFragment newInstance()
     {
