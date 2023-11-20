@@ -10,6 +10,7 @@ import es.incidence.core.domain.Incidence;
 import es.incidence.core.domain.User;
 import es.incidence.core.domain.Vehicle;
 import es.incidence.core.fragment.add.AddBeaconFragment;
+import es.incidence.core.fragment.beacon.BeaconDetailFragment;
 import es.incidence.core.fragment.beacon.BeaconListFragment;
 import es.incidence.core.fragment.ecommerce.EcommerceFragment;
 import es.incidence.core.fragment.incidence.ReportIncidenceSimpleFragment;
@@ -37,13 +38,14 @@ public class SimpleMainActivity extends IActivity
             Vehicle vehicle = b.getParcelable("vehicle");
 
             showInitialFragment(AddBeaconFragment.newInstance(0, 1, vehicle, user, true));
-        } else if (Constants.SCREEN_DEVICE_DELETE.equals(screen)) {
+        } else if (Constants.SCREEN_DEVICE_REVIEW.equals(screen)) {
 
 
             User user = b.getParcelable("user");
             Vehicle vehicle = b.getParcelable("vehicle");
+            String imei = b.getString("imei");
 
-            showInitialFragment(AddBeaconFragment.newInstance(0, 1, vehicle, user, true));
+            showInitialFragment(BeaconDetailFragment.newInstance(vehicle, user, imei));
         } else if (Constants.FUNC_REPOR_INC.equals(screen)) {
 
             User user = b.getParcelable("user");

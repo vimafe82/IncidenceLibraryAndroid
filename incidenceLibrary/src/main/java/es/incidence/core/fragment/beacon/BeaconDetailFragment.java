@@ -34,7 +34,6 @@ import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 import es.incidence.core.Constants;
-import es.incidence.core.Core;
 import es.incidence.core.adapter.IncidenceDGTListAdapter;
 import es.incidence.core.domain.Beacon;
 import es.incidence.core.domain.IncidenceDGT;
@@ -48,12 +47,15 @@ import es.incidence.core.manager.ImageManager;
 import es.incidence.core.utils.IUtils;
 import es.incidence.core.utils.view.IButton;
 import es.incidence.core.utils.view.INavigation;
+import es.incidence.library.IncidenceLibraryManager;
 
 public class BeaconDetailFragment extends IFragment
 {
     private static final String TAG = makeLogTag(BeaconDetailFragment.class);
 
-    public static final String KEY_BEACON = "KEY_BEACON";
+    public static final String KEY_AUTO_SELECTED_VEHICLE = "KEY_AUTO_SELECTED_VEHICLE";
+    public static final String KEY_AUTO_SELECTED_USER = "KEY_AUTO_SELECTED_USER";
+    public static final String KEY_AUTO_SELECTED_IMEI = "KEY_AUTO_SELECTED_IMEI";
 
     private INavigation navigation;
     private RelativeLayout layoutRootBeaconDetailFind;
@@ -90,6 +92,9 @@ public class BeaconDetailFragment extends IFragment
     private Handler handlerVibrate;
 
     private Beacon beacon;
+    public Vehicle autoSelectedVehicle;
+    public User autoSelectedUser;
+    public String autoSelectedImei;
 
     private Integer battery;
     private String expirationDate;
@@ -106,12 +111,14 @@ public class BeaconDetailFragment extends IFragment
 
     private boolean hasVibrate = false;
 
-    public static BeaconDetailFragment newInstance(Beacon beacon)
+    public static BeaconDetailFragment newInstance(Vehicle vehicle, User user, String imei)
     {
         BeaconDetailFragment fragment = new BeaconDetailFragment();
 
         Bundle bundle = new Bundle();
-        bundle.putParcelable(KEY_BEACON, beacon);
+        bundle.putParcelable(KEY_AUTO_SELECTED_VEHICLE, vehicle);
+        bundle.putParcelable(KEY_AUTO_SELECTED_USER, user);
+        bundle.putString(KEY_AUTO_SELECTED_IMEI, imei);
         fragment.setArguments(bundle);
 
         return fragment;
@@ -126,7 +133,9 @@ public class BeaconDetailFragment extends IFragment
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if(getArguments() != null) {
-            beacon = getArguments().getParcelable(KEY_BEACON);
+            autoSelectedVehicle = getArguments().getParcelable(KEY_AUTO_SELECTED_VEHICLE);
+            autoSelectedUser = getArguments().getParcelable(KEY_AUTO_SELECTED_USER);
+            autoSelectedImei = getArguments().getString(KEY_AUTO_SELECTED_IMEI);
         }
     }
 
@@ -154,7 +163,8 @@ public class BeaconDetailFragment extends IFragment
 
         navigation = rootView.findViewById(R.id.inavigation);
 
-        String title = beacon.name;
+        //String title = beacon.name;
+        String title = "";
         navigation.init(this, title, true);
 
         layoutRootBeaconDetailFind = rootView.findViewById(R.id.layoutRootBeaconDetailFind);
@@ -259,13 +269,25 @@ public class BeaconDetailFragment extends IFragment
         });
 
         imageBeacon = layoutRootBeaconDetailFind.findViewById(R.id.imageBeacon);
+
+
+
+        IncidenceLibraryManager.instance.setViewBackground(rootView);
+        //IncidenceLibraryManager.instance.setViewBackground(layoutRootBeaconDetailFind);
+
+        startCountDownTimer();
+    }
+
+    public void updateUI() {
+
+        String title = beacon.name;
+        navigation.setTitle(title);
+
         if (beacon.beaconType != null && beacon.beaconType.imageBeacon != null) {
             ImageManager.loadImage(getContext(), beacon.beaconType.imageBeacon, null, imageBeacon, true);
         } else {
             imageBeacon.setImageResource(R.drawable.device_start);
         }
-
-        startCountDownTimer();
     }
 
     private void startCountDownTimer() {
@@ -357,12 +379,39 @@ public class BeaconDetailFragment extends IFragment
     @Override
     public void loadData()
     {
-        refreshData();
+        showHud();
+        Api.getBeaconSdk(new IRequestListener() {
+            @Override
+            public void onFinish(IResponse response) {
+
+                hideHud();
+
+                if (response.isSuccess())
+                {
+                    ArrayList<Beacon> list = response.getList("beacon", Beacon.class);
+                    if (list.size() > 0) {
+                        beacon = list.get(0);
+                    }
+
+
+                    updateUI();
+                    refreshData();
+                }
+                else
+                {
+                    DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            onClickReturn();
+                        }
+                    };
+                    onBadResponse(response, listener);
+                }
+            }
+        }, autoSelectedUser, autoSelectedVehicle, autoSelectedImei);
     }
 
     private void refreshData() {
-        User user = Core.getUser();
-        Vehicle vehicle = Core.getVehicleFromBeacon(beacon.id+"");
         Api.getBeaconDetailSdk(new IRequestListener() {
             @Override
             public void onFinish(IResponse response) {
@@ -381,6 +430,7 @@ public class BeaconDetailFragment extends IFragment
                                 if (data.has("battery")) battery = data.getInt("battery");
                                 if (data.has("expirationDate")) expirationDate = data.getString("expirationDate");
                                 if (data.has("dgt")) dgt = data.getInt("dgt");
+
 
                                 items.clear();
                                 JSONArray incidences = data.optJSONArray("incidences");
@@ -466,7 +516,7 @@ public class BeaconDetailFragment extends IFragment
                 }
 
             }
-        }, user, vehicle);
+        }, autoSelectedUser, autoSelectedVehicle);
     }
 
     private void openAlertStopDeviceView() {

@@ -21,6 +21,7 @@ import es.incidence.core.manager.ImageManager;
 import es.incidence.core.utils.view.IButton;
 import es.incidence.core.utils.view.INavigation;
 import es.incidence.core.utils.view.IStepper;
+import es.incidence.library.IncidenceLibraryManager;
 
 public class BeaconDetailInfoFragment extends IFragment
 {
@@ -119,6 +120,8 @@ public class BeaconDetailInfoFragment extends IFragment
         } else {
             txtHeaderBeacon.setText(R.string.device_desc_info1);
         }
+
+        IncidenceLibraryManager.instance.setViewBackground(rootView);
     }
 
     private void onClickBlue() {

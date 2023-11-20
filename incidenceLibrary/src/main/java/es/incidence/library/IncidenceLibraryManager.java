@@ -21,6 +21,8 @@ import es.incidence.core.domain.User;
 import es.incidence.core.domain.Vehicle;
 import es.incidence.core.entity.AppConfig;
 import es.incidence.core.manager.Api;
+import es.incidence.core.manager.IActionListener;
+import es.incidence.core.manager.IActionResponse;
 import es.incidence.core.manager.IRequestListener;
 import es.incidence.core.manager.IResponse;
 import es.incidence.library.config.IncidenceLibraryConfig;
@@ -67,6 +69,7 @@ public class IncidenceLibraryManager {
 
                     screens = response.getList("functionalities", String.class);
                     instance.screens.add(Constants.SCREEN_DEVICE_CREATE);
+                    instance.screens.add(Constants.SCREEN_DEVICE_REVIEW);
                     instance.screens.add(Constants.SCREEN_ECOMMERCE);
                     instance.screens.add(Constants.FUNC_CLOSE_INC);
                     //insurance = (Insurance) response.get("insurance", Insurance.class);
@@ -107,6 +110,19 @@ public class IncidenceLibraryManager {
         String res = validateScreen(Constants.SCREEN_DEVICE_LIST);
         if (res == SCREEN_OK) {
             return createIntent(Constants.SCREEN_DEVICE_LIST);
+        } else {
+            return processScreenError(res);
+        }
+    }
+
+    public Intent getDeviceReviewViewController(User user, Vehicle vehicle, String imei) {
+        String res = validateScreen(Constants.SCREEN_DEVICE_REVIEW);
+        if (res == SCREEN_OK) {
+            Intent intent = createIntent(Constants.SCREEN_DEVICE_REVIEW);
+            intent.putExtra("user", user);
+            intent.putExtra("vehicle", vehicle);
+            intent.putExtra("imei", imei);
+            return intent;
         } else {
             return processScreenError(res);
         }
@@ -270,5 +286,26 @@ public class IncidenceLibraryManager {
 
     public boolean closeIncidenceFunc(User user, Vehicle vehicle, Incidence incidence) {
         return  false;
+    }
+
+    public void deleteBeaconFunc(User user, Vehicle vehicle, IActionListener iActionListener) {
+        Api.deleteBeaconSdk(new IRequestListener() {
+            @Override
+            public void onFinish(IResponse response) {
+                if (iActionListener != null) {
+                    IActionResponse actionResponse;
+                    if (response.isSuccess())
+                    {
+                        actionResponse = new IActionResponse(true);
+                    }
+                    else
+                    {
+                        actionResponse = new IActionResponse(false, response.message);
+                    }
+
+                    iActionListener.onFinish(actionResponse);
+                }
+            }
+        }, user, vehicle);
     }
 }

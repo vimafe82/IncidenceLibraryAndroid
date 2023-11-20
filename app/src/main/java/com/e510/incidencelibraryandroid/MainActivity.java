@@ -15,14 +15,17 @@ import es.incidence.core.domain.Policy;
 import es.incidence.core.domain.User;
 import es.incidence.core.domain.Vehicle;
 import es.incidence.core.domain.VehicleType;
+import es.incidence.core.manager.IActionListener;
+import es.incidence.core.manager.IActionResponse;
 import es.incidence.library.IncidenceLibraryManager;
 
 public class MainActivity extends AppCompatActivity {
 
+    private Button btnDeviceCreate;
     private Button btnDeviceDelete;
+    private Button btnDeviceReview;
     private Button btnIncidenceCreate;
     private Button btnIncidenceClose;
-
     private Button btnEcommerce;
 
     @Override
@@ -36,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         String externalVehicleId = "15001";
         String licensePlate = "1511XXX";
         String externalIncidenceId = "15001";
+        String imei = "869154040054509";
 
         IdentityType dniIdentityType = new IdentityType();
         dniIdentityType.name = "dni"; // (tipo de documento de identidad: dni, nie, cif)
@@ -85,16 +89,7 @@ public class MainActivity extends AppCompatActivity {
         incidence.longitude = 2.2319534;
         incidence.externalIncidenceId = externalIncidenceId;
 
-        /*Button btnDeviceList = findViewById(R.id.btnDeviceList);
-        btnDeviceList.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent activity = IncidenceLibraryManager.instance.getDeviceListViewController();
-                startActivity(activity);
-            }
-        });*/
-
-        Button btnDeviceCreate = findViewById(R.id.btnDeviceCreate);
+        btnDeviceCreate = findViewById(R.id.btnDeviceCreate);
         btnDeviceCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -107,7 +102,28 @@ public class MainActivity extends AppCompatActivity {
         btnDeviceDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent activity = IncidenceLibraryManager.instance.getDeviceListViewController();
+                //Intent activity = IncidenceLibraryManager.instance.getDeviceListViewController();
+                //startActivity(activity);
+
+                IncidenceLibraryManager.instance.deleteBeaconFunc(user, vehicle, new IActionListener() {
+
+                    @Override
+                    public void onFinish(IActionResponse response) {
+                        if (response.isSuccess()) {
+                            //MAKE OK ACTIONS
+                        } else {
+                            //MAKE KO ACTIONS
+                        }
+                    }
+                });
+            }
+        });
+
+        btnDeviceReview = findViewById(R.id.btnDeviceReview);
+        btnDeviceReview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent activity = IncidenceLibraryManager.instance.getDeviceReviewViewController(user, vehicle, imei);
                 startActivity(activity);
             }
         });
@@ -151,6 +167,5 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        btnDeviceDelete.setEnabled(IncidenceLibraryManager.instance.haveBeacon());
     }
 }

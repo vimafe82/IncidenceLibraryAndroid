@@ -258,7 +258,7 @@ public class BeaconListFragment extends ListFragment
                         //cancela
                     }
                     else if (index == 1) {
-                        mListener.addFragmentAnimated(BeaconDetailFragment.newInstance(beacon));
+                        //mListener.addFragmentAnimated(BeaconDetailFragment.newInstance(beacon));
                     }
                     else if (index == 2)
                     {

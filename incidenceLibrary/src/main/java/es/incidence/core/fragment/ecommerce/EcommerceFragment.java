@@ -44,6 +44,7 @@ import es.incidence.core.utils.CustomSuperscriptSpan;
 import es.incidence.core.utils.view.IButton;
 //import es.incidence.core.utils.view.ICirclePageIndicator;
 import es.incidence.core.utils.view.INavigation;
+import es.incidence.library.IncidenceLibraryManager;
 
 public class EcommerceFragment extends IFragment
 {
@@ -144,6 +145,8 @@ public class EcommerceFragment extends IFragment
             }
         });
         //circlePageIndicator.setViewPager(viewPager);
+
+        IncidenceLibraryManager.instance.setViewBackground(rootView);
     }
 
     @Override

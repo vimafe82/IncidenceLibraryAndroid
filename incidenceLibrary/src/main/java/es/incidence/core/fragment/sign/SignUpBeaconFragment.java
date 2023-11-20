@@ -324,6 +324,7 @@ public class SignUpBeaconFragment extends SignUpFragment {
                     layoutScanQRNavigation.init(this, getString(R.string.create_account_step3), true);
                     layoutScanQRNavigation.setTitleColor(Utils.getColor(getContext(), android.R.color.white));
                     layoutScanQRNavigation.setBackColor(Utils.getColor(getContext(), android.R.color.white));
+                    layoutScanQRNavigation.clearBackground();
 
                     TextView txtHeaderQr = layoutScanQR.findViewById(R.id.txtHeaderQr);
                     FontUtils.setTypeValueText(txtHeaderQr, Constants.FONT_REGULAR, getContext());
@@ -1002,11 +1003,11 @@ public class SignUpBeaconFragment extends SignUpFragment {
                     String jsonStr = gson.toJson(userResponse);
                     Core.saveData(Constants.KEY_USER, jsonStr);
 
-                    beacon.name = vehicle.getName();
-                    vehicle.beacon = beacon;
-                    vehicle.id=vehicle.externalVehicleId;
+                    //beacon.name = vehicle.getName();
+                    //vehicle.beacon = beacon;
+                    //vehicle.id=vehicle.externalVehicleId;
 
-                    Core.saveVehicle(vehicle);
+                    //Core.saveVehicle(vehicle);
                     //EventBus.getDefault().post(new Event(EventCode.VEHICLE_UPDATED, vehicle));
                     //EventBus.getDefault().post(new Event(EventCode.BEACON_ADDED, vehicle.beacon));
 

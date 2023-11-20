@@ -39,8 +39,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/activity_horizontal_margin"
-        android:text="Opciones de baliza"
+        android:text="Desvincular baliza"
         app:layout_constraintBottom_toBottomOf="@+id/btnDeviceCreate"
+        />
+
+    <Button
+        android:id="@+id/btnDeviceReview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:text="Comprobar baliza"
+        app:layout_constraintBottom_toBottomOf="@+id/btnDeviceDelete"
         />
 
     <Button
@@ -49,7 +58,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/activity_horizontal_margin"
         android:text="Crear incidencia"
-        app:layout_constraintBottom_toBottomOf="@+id/btnDeviceDelete"
+        app:layout_constraintBottom_toBottomOf="@+id/btnDeviceReview"
         />
 
     <Button
