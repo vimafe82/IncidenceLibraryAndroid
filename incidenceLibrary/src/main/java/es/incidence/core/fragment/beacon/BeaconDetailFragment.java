@@ -94,7 +94,6 @@ public class BeaconDetailFragment extends IFragment
     private Beacon beacon;
     public Vehicle autoSelectedVehicle;
     public User autoSelectedUser;
-    public String autoSelectedImei;
 
     private Integer battery;
     private String expirationDate;
@@ -111,14 +110,13 @@ public class BeaconDetailFragment extends IFragment
 
     private boolean hasVibrate = false;
 
-    public static BeaconDetailFragment newInstance(Vehicle vehicle, User user, String imei)
+    public static BeaconDetailFragment newInstance(Vehicle vehicle, User user)
     {
         BeaconDetailFragment fragment = new BeaconDetailFragment();
 
         Bundle bundle = new Bundle();
         bundle.putParcelable(KEY_AUTO_SELECTED_VEHICLE, vehicle);
         bundle.putParcelable(KEY_AUTO_SELECTED_USER, user);
-        bundle.putString(KEY_AUTO_SELECTED_IMEI, imei);
         fragment.setArguments(bundle);
 
         return fragment;
@@ -135,7 +133,6 @@ public class BeaconDetailFragment extends IFragment
         if(getArguments() != null) {
             autoSelectedVehicle = getArguments().getParcelable(KEY_AUTO_SELECTED_VEHICLE);
             autoSelectedUser = getArguments().getParcelable(KEY_AUTO_SELECTED_USER);
-            autoSelectedImei = getArguments().getString(KEY_AUTO_SELECTED_IMEI);
         }
     }
 
@@ -415,7 +412,7 @@ public class BeaconDetailFragment extends IFragment
                     onBadResponse(response, listener);
                 }
             }
-        }, autoSelectedUser, autoSelectedVehicle, autoSelectedImei);
+        }, autoSelectedUser, autoSelectedVehicle);
     }
 
     private void refreshData() {

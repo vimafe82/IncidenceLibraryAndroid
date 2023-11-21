@@ -43,9 +43,8 @@ public class SimpleMainActivity extends IActivity
 
             User user = b.getParcelable("user");
             Vehicle vehicle = b.getParcelable("vehicle");
-            String imei = b.getString("imei");
 
-            showInitialFragment(BeaconDetailFragment.newInstance(vehicle, user, imei));
+            showInitialFragment(BeaconDetailFragment.newInstance(vehicle, user));
         } else if (Constants.FUNC_REPOR_INC.equals(screen)) {
 
             User user = b.getParcelable("user");

@@ -1424,7 +1424,7 @@ public class Api
         Networking.getDirect(url, params, requestListener);
     }
 
-    public static void getBeaconSdk(final IRequestListener viewListener, User user, Vehicle vehicle, String imei)
+    public static void getBeaconSdk(final IRequestListener viewListener, User user, Vehicle vehicle)
     {
         Networking.setBasicHeader(HEADER_TOKEN, getToken());
 

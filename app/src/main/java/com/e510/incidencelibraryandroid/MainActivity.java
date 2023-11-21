@@ -15,8 +15,6 @@ import es.incidence.core.domain.Policy;
 import es.incidence.core.domain.User;
 import es.incidence.core.domain.Vehicle;
 import es.incidence.core.domain.VehicleType;
-import es.incidence.core.manager.IActionListener;
-import es.incidence.core.manager.IActionResponse;
 import es.incidence.library.IncidenceLibraryManager;
 
 public class MainActivity extends AppCompatActivity {
@@ -102,64 +100,42 @@ public class MainActivity extends AppCompatActivity {
         btnDeviceDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                IncidenceLibraryManager.instance.deleteBeaconFunc(user, vehicle, new IActionListener() {
-
-                    @Override
-                    public void onFinish(IActionResponse response) {
-                        if (response.isSuccess()) {
-                            //MAKE OK ACTIONS
-                        } else {
-                            //MAKE KO ACTIONS
-                        }
+                IncidenceLibraryManager.instance.deleteBeaconFunc(user, vehicle, response -> {
+                    if (response.isSuccess()) {
+                        //MAKE OK ACTIONS
+                    } else {
+                        //MAKE KO ACTIONS
                     }
                 });
             }
         });
 
         btnDeviceReview = findViewById(R.id.btnDeviceReview);
-        btnDeviceReview.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent activity = IncidenceLibraryManager.instance.getDeviceReviewViewController(user, vehicle, imei);
-                startActivity(activity);
-            }
+        btnDeviceReview.setOnClickListener(v -> {
+            Intent activity = IncidenceLibraryManager.instance.getDeviceReviewViewController(user, vehicle);
+            startActivity(activity);
         });
 
         btnIncidenceCreate = findViewById(R.id.btnIncidenceCreate);
-        btnIncidenceCreate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                IncidenceLibraryManager.instance.createIncidenceFunc(user, vehicle, incidence, new IActionListener() {
-
-                    @Override
-                    public void onFinish(IActionResponse response) {
-                        if (response.isSuccess()) {
-                            //MAKE OK ACTIONS
-                        } else {
-                            //MAKE KO ACTIONS
-                        }
-                    }
-                });
+        btnIncidenceCreate.setOnClickListener(v ->
+            IncidenceLibraryManager.instance.createIncidenceFunc(user, vehicle, incidence, response -> {
+                if (response.isSuccess()) {
+                    //MAKE OK ACTIONS
+                } else {
+                    //MAKE KO ACTIONS
+                }
             }
-        });
+        ));
 
         btnIncidenceClose = findViewById(R.id.btnIncidenceClose);
         btnIncidenceClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Intent activity = IncidenceLibraryManager.instance.getIncidenceCloseViewController(user, vehicle, incidence);
-                //startActivity(activity);
-
-
-                IncidenceLibraryManager.instance.closeIncidenceFunc(user, vehicle, incidence, new IActionListener() {
-
-                    @Override
-                    public void onFinish(IActionResponse response) {
-                        if (response.isSuccess()) {
-                            //MAKE OK ACTIONS
-                        } else {
-                            //MAKE KO ACTIONS
-                        }
+                IncidenceLibraryManager.instance.closeIncidenceFunc(user, vehicle, incidence, response -> {
+                    if (response.isSuccess()) {
+                        //MAKE OK ACTIONS
+                    } else {
+                        //MAKE KO ACTIONS
                     }
                 });
 
@@ -167,12 +143,9 @@ public class MainActivity extends AppCompatActivity {
         });
 
         btnEcommerce = findViewById(R.id.btnEcommerce);
-        btnEcommerce.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent activity = IncidenceLibraryManager.instance.getEcommerceViewController(user, vehicle);
-                startActivity(activity);
-            }
+        btnEcommerce.setOnClickListener(v -> {
+            Intent activity = IncidenceLibraryManager.instance.getEcommerceViewController(user, vehicle);
+            startActivity(activity);
         });
     }
 

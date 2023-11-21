@@ -115,13 +115,12 @@ public class IncidenceLibraryManager {
         }
     }
 
-    public Intent getDeviceReviewViewController(User user, Vehicle vehicle, String imei) {
+    public Intent getDeviceReviewViewController(User user, Vehicle vehicle) {
         String res = validateScreen(Constants.SCREEN_DEVICE_REVIEW);
         if (res == SCREEN_OK) {
             Intent intent = createIntent(Constants.SCREEN_DEVICE_REVIEW);
             intent.putExtra("user", user);
             intent.putExtra("vehicle", vehicle);
-            intent.putExtra("imei", imei);
             return intent;
         } else {
             return processScreenError(res);
