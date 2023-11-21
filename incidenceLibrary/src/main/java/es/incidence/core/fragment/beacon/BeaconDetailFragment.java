@@ -391,11 +391,18 @@ public class BeaconDetailFragment extends IFragment
                     ArrayList<Beacon> list = response.getList("beacon", Beacon.class);
                     if (list.size() > 0) {
                         beacon = list.get(0);
+
+                        updateUI();
+                        refreshData();
+                    } else {
+                        DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                onClickReturn();
+                            }
+                        };
+                        showAlert(getString(R.string.nombre_app), "Sin balizas asociados", listener);
                     }
-
-
-                    updateUI();
-                    refreshData();
                 }
                 else
                 {

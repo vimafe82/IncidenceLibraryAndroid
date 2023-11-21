@@ -140,6 +140,7 @@ public class IncidenceLibraryManager {
         }
     }
 
+    /*
     public Intent getIncidenceCreateViewController(User user, Vehicle vehicle, Incidence incidence) {
         String res = validateScreen(Constants.FUNC_REPOR_INC);
         if (res == SCREEN_OK) {
@@ -152,7 +153,9 @@ public class IncidenceLibraryManager {
             return processScreenError(res);
         }
     }
+    */
 
+    /*
     public Intent getIncidenceCloseViewController(User user, Vehicle vehicle, Incidence incidence) {
         String res = validateScreen(Constants.FUNC_CLOSE_INC);
         if (res == SCREEN_OK) {
@@ -165,6 +168,7 @@ public class IncidenceLibraryManager {
             return processScreenError(res);
         }
     }
+    */
 
     public Intent getEcommerceViewController(User user, Vehicle vehicle) {
         String res = validateScreen(Constants.SCREEN_ECOMMERCE);
@@ -272,22 +276,6 @@ public class IncidenceLibraryManager {
         return null;
     }
 
-    public Intent getBalizaInfoViewController(User user, Vehicle vehicle) {
-        return null;
-    }
-
-    public boolean deleteBalizaFunc(User user, Vehicle vehicle) {
-        return false;
-    }
-
-    public boolean createIncidenceFunc(User user, Vehicle vehicle, Incidence incidence) {
-        return  false;
-    }
-
-    public boolean closeIncidenceFunc(User user, Vehicle vehicle, Incidence incidence) {
-        return  false;
-    }
-
     public void deleteBeaconFunc(User user, Vehicle vehicle, IActionListener iActionListener) {
         Api.deleteBeaconSdk(new IRequestListener() {
             @Override
@@ -307,5 +295,47 @@ public class IncidenceLibraryManager {
                 }
             }
         }, user, vehicle);
+    }
+
+    public void createIncidenceFunc(User user, Vehicle vehicle, Incidence incidence, IActionListener iActionListener) {
+        Api.postIncidenceSdk(new IRequestListener() {
+            @Override
+            public void onFinish(IResponse response) {
+                if (iActionListener != null) {
+                    IActionResponse actionResponse;
+                    if (response.isSuccess())
+                    {
+                        actionResponse = new IActionResponse(true);
+                    }
+                    else
+                    {
+                        actionResponse = new IActionResponse(false, response.message);
+                    }
+
+                    iActionListener.onFinish(actionResponse);
+                }
+            }
+        }, user, vehicle, incidence);
+    }
+
+    public void closeIncidenceFunc(User user, Vehicle vehicle, Incidence incidence, IActionListener iActionListener) {
+        Api.putIncidenceSdk(new IRequestListener() {
+            @Override
+            public void onFinish(IResponse response) {
+                if (iActionListener != null) {
+                    IActionResponse actionResponse;
+                    if (response.isSuccess())
+                    {
+                        actionResponse = new IActionResponse(true);
+                    }
+                    else
+                    {
+                        actionResponse = new IActionResponse(false, response.message);
+                    }
+
+                    iActionListener.onFinish(actionResponse);
+                }
+            }
+        }, user, vehicle, incidence);
     }
 }

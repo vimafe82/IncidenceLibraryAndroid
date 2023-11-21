@@ -102,9 +102,6 @@ public class MainActivity extends AppCompatActivity {
         btnDeviceDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Intent activity = IncidenceLibraryManager.instance.getDeviceListViewController();
-                //startActivity(activity);
-
                 IncidenceLibraryManager.instance.deleteBeaconFunc(user, vehicle, new IActionListener() {
 
                     @Override
@@ -132,8 +129,17 @@ public class MainActivity extends AppCompatActivity {
         btnIncidenceCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent activity = IncidenceLibraryManager.instance.getIncidenceCreateViewController(user, vehicle, incidence);
-                startActivity(activity);
+                IncidenceLibraryManager.instance.createIncidenceFunc(user, vehicle, incidence, new IActionListener() {
+
+                    @Override
+                    public void onFinish(IActionResponse response) {
+                        if (response.isSuccess()) {
+                            //MAKE OK ACTIONS
+                        } else {
+                            //MAKE KO ACTIONS
+                        }
+                    }
+                });
             }
         });
 
@@ -141,14 +147,21 @@ public class MainActivity extends AppCompatActivity {
         btnIncidenceClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent activity = IncidenceLibraryManager.instance.getIncidenceCloseViewController(user, vehicle, incidence);
-                startActivity(activity);
-
-
-                //Intent activity = IncidenceLibraryManager.instance.getBalizaInfoViewController(user, vehicle);
+                //Intent activity = IncidenceLibraryManager.instance.getIncidenceCloseViewController(user, vehicle, incidence);
                 //startActivity(activity);
 
-                //boolean result = IncidenceLibraryManager.instance.closeIncidenceFunc(user, vehicle, incidence);
+
+                IncidenceLibraryManager.instance.closeIncidenceFunc(user, vehicle, incidence, new IActionListener() {
+
+                    @Override
+                    public void onFinish(IActionResponse response) {
+                        if (response.isSuccess()) {
+                            //MAKE OK ACTIONS
+                        } else {
+                            //MAKE KO ACTIONS
+                        }
+                    }
+                });
 
             }
         });
