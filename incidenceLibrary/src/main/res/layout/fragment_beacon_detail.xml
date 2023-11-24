@@ -84,7 +84,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/inavigation"
-        android:layout_marginVertical="@dimen/margin_normal"
+        android:layout_marginBottom="@dimen/margin_normal"
         android:id="@+id/layoutRootBeaconDetailInfo"
         android:visibility="gone">
 
@@ -93,19 +93,22 @@
             android:layout_height="wrap_content"
             android:id="@+id/layoutRootFecha">
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/margin_normal"
                 android:layout_marginRight="@dimen/margin_normal"
                 android:id="@+id/layoutRowFecha"
                 android:layout_marginBottom="@dimen/margin_field"
+                android:orientation="horizontal"
+                android:gravity="bottom"
                 >
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true">
+                    android:layout_centerVertical="true"
+                    android:layout_weight="1">
 
                     <RelativeLayout
                         android:id="@+id/txtTitleLayoutFecha"
@@ -144,7 +147,15 @@
 
                 </RelativeLayout>
 
-            </RelativeLayout>
+
+                <ImageView
+                    android:id="@+id/imgDevice"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
+                    android:src="@drawable/icon_exclamation"
+                    android:visibility="visible"
+                    android:layout_marginBottom="@dimen/margin_normal_medium"/>
+            </LinearLayout>
 
             <View
                 android:id="@+id/lineFecha"

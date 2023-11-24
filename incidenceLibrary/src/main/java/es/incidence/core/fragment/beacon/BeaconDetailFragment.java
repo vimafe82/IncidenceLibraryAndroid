@@ -69,6 +69,7 @@ public class BeaconDetailFragment extends IFragment
     private ImageView imgInfo;
 
     private ImageView imageBeacon;
+	private ImageView imgDevice;
 
     private ListView listView;
     private IncidenceDGTListAdapter adapter;
@@ -95,7 +96,8 @@ public class BeaconDetailFragment extends IFragment
     public Vehicle autoSelectedVehicle;
     public User autoSelectedUser;
 
-    private Integer battery;
+    private Double battery;
+    private Integer alert = 0;
     private String expirationDate;
     private Integer dgt = 0;
     public ArrayList<IncidenceDGT> items;
@@ -176,6 +178,7 @@ public class BeaconDetailFragment extends IFragment
 
         txtSubTitleBattery = layoutRootBeaconDetailInfo.findViewById(R.id.txtSubTitleBattery);
         txtSubtitleFecha = layoutRootBeaconDetailInfo.findViewById(R.id.txtSubtitleFecha);
+        imgDevice = layoutRootBeaconDetailInfo.findViewById(R.id.imgDevice);
 
         //---
         layoutStopDevice = rootView.findViewById(R.id.layoutStopDevice);
@@ -265,7 +268,8 @@ public class BeaconDetailFragment extends IFragment
             }
         });
 
-        imageBeacon = layoutRootBeaconDetailFind.findViewById(R.id.imageBeacon);
+		imageBeacon = layoutRootBeaconDetailFind.findViewById(R.id.imageBeacon);
+        
 
 
 
@@ -285,6 +289,9 @@ public class BeaconDetailFragment extends IFragment
         } else {
             imageBeacon.setImageResource(R.drawable.device_start);
         }
+		
+		int drawable = beacon.beaconType != null && beacon.beaconType.id == 1 ? R.drawable.beacon_icon_smart :  beacon.beaconType != null && beacon.beaconType.id == 3 ? R.drawable.beacon_icon_hella : R.drawable.beacon_icon_iot;
+        imgDevice.setImageDrawable(getContext().getDrawable(drawable));
     }
 
     private void startCountDownTimer() {
@@ -431,8 +438,9 @@ public class BeaconDetailFragment extends IFragment
                             JSONObject data = obj.optJSONObject("data");
                             //JSONObject data = new JSONObject("{\"dgt\":0,\"incidences\":[{\"hour\":\"17:23\",\"id\":1,\"lat\":41.38879,\"lon\":2.1589900000000002,\"date\":\"27/10/2022\"},{\"hour\":\"22:10\",\"id\":2,\"lat\":41.38879,\"lon\":2.1589900000000002,\"date\":\"21/10/2022\"},{\"hour\":\"11:20\",\"id\":3,\"lat\":41.38879,\"lon\":2.1589900000000002,\"date\":\"16/10/2022\"},{\"hour\":\"09:33\",\"id\":4,\"lat\":41.38879,\"lon\":2.1589900000000002,\"date\":\"08/10/2022\"},{\"hour\":\"10:00\",\"id\":5,\"lat\":41.38879,\"lon\":2.1589900000000002,\"date\":\"01/10/2022\"}],\"expirationDate\":\"2037-12-31 23:59:59\",\"battery\":27.999999999999972,\"imei\":\"869154040054509\"}");
                             if (data != null) {
-                                if (data.has("battery")) battery = data.getInt("battery");
+                                if (data.has("battery")) battery = data.getDouble("battery");
                                 if (data.has("expirationDate")) expirationDate = data.getString("expirationDate");
+                                if (data.has("alert")) alert = data.getInt("alert");
                                 if (data.has("dgt")) dgt = data.getInt("dgt");
 
 
@@ -553,13 +561,14 @@ public class BeaconDetailFragment extends IFragment
         layoutRootBeaconDetailFind.setVisibility(View.GONE);
         layoutRootBeaconDetailInfo.setVisibility(View.VISIBLE);
 
-        progressBar.setProgress(battery);
-        if (battery <= 20) {
+        progressBar.setProgress(battery.intValue());
+        //if (battery <= 20) {
+        if (alert == 1) {
             progressBar.getProgressDrawable().setColorFilter(Color.RED, android.graphics.PorterDuff.Mode.SRC_IN);
             DrawableCompat.setTint(imgInfo.getDrawable(), Color.RED);
         }
 
-        txtSubTitleBattery.setText(battery + " %");
+        txtSubTitleBattery.setText(String.format("%.2f", battery) + "%");
         txtSubtitleFecha.setText(expirationDate);
 
         adapter.notifyDataSetChanged();

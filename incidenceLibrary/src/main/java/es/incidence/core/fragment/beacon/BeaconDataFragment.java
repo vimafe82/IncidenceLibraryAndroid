@@ -128,7 +128,7 @@ public class BeaconDataFragment extends ListFragment
             }
 
             //if (beacon.iot != null)
-            if (beacon.beaconType != null && beacon.beaconType.id == 2)
+            if (beacon.beaconType != null && beacon.beaconType.id != 1)
             {
                 ListItem lBottom = new ListItem(getString(R.string.validate_device), ROW_VALIDATE_BEACON);
                 addRowBottom(lBottom);

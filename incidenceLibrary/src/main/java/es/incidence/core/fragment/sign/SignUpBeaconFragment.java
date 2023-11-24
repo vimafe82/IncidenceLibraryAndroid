@@ -111,6 +111,7 @@ public class SignUpBeaconFragment extends SignUpFragment {
 
     //QR
     public boolean isIoT;
+    public int beaconTypeId;
     private CodeScanner mCodeScanner;
     private RelativeLayout layoutScanQR;
 
@@ -874,16 +875,15 @@ public class SignUpBeaconFragment extends SignUpFragment {
         navigation.setEnabled(false);
         stepper.setVisibility(View.GONE);
 
-        layoutSuccess.setVisibility(View.VISIBLE);/*
-        if (isIoT)
+        layoutSuccess.setVisibility(View.VISIBLE);
+        if (beaconTypeId == 1) {
+            imgInSuccess.setImageDrawable(Utils.getDrawable(getContext(), R.drawable.beacon_icon_smart));
+        } else if (beaconTypeId == 3) {
+            imgInSuccess.setImageDrawable(Utils.getDrawable(getContext(), R.drawable.beacon_icon_hella));
+        } else
         {
             imgInSuccess.setImageDrawable(Utils.getDrawable(getContext(), R.drawable.beacon_icon_iot));
         }
-        else
-        {
-            imgInSuccess.setImageDrawable(Utils.getDrawable(getContext(), R.drawable.beacon_icon_smart));
-        }*/
-
 
         currentView = VIEW_BEACON_ADDED;
     }
@@ -1006,6 +1006,10 @@ public class SignUpBeaconFragment extends SignUpFragment {
                     //vehicle.beacon = beacon;
                     //vehicle.id=vehicle.externalVehicleId;
 
+					Beacon cBeacon = (Beacon) response.get("beacon", Beacon.class);
+                    if (cBeacon != null && cBeacon.beaconType != null) {
+                        beaconTypeId = cBeacon.beaconType.id;
+                    }
                     //Core.saveVehicle(vehicle);
                     //EventBus.getDefault().post(new Event(EventCode.VEHICLE_UPDATED, vehicle));
                     //EventBus.getDefault().post(new Event(EventCode.BEACON_ADDED, vehicle.beacon));
