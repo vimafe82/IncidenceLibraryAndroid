@@ -32,6 +32,8 @@ import java.util.Locale;
 import java.util.Map;
 
 import dev.b3nedikt.restring.Restring;
+import dev.b3nedikt.reword.RewordInterceptor;
+import dev.b3nedikt.viewpump.ViewPump;
 import es.incidence.core.domain.BeaconType;
 import es.incidence.core.domain.ColorType;
 import es.incidence.core.domain.DeviceNotification;
@@ -71,6 +73,8 @@ public class Core {
     public static void init(Application app, String apikey, Environment environment) {
         application = app;
         prepareConfigs(apikey, environment);
+        Restring.init(app);
+        ViewPump.init(RewordInterceptor.INSTANCE);
     }
 
     private static void prepareConfigs(String apikey, Environment environment) {

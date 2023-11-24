@@ -596,7 +596,6 @@ public class SignUpBeaconFragment extends SignUpFragment {
         TextView txtTitle = popupContainer.findViewById(R.id.txtTitle);
         TextView txtSubTitle = popupContainer.findViewById(R.id.txtSubTitle);
         IField fieldImei = popupContainer.findViewById(R.id.fieldImei);
-        fieldImei.setText("869154040054509");
         RelativeLayout layoutRootIField = fieldImei.findViewById(R.id.layoutRoot);
         FloatEditText textInputLayout = fieldImei.findViewById(R.id.textInputLayout);
         IButton btnBlue = popupContainer.findViewById(R.id.btnBlue);

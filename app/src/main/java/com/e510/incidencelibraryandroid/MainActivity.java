@@ -37,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
         String externalVehicleId = "15001";
         String licensePlate = "1511XXX";
         String externalIncidenceId = "15001";
-        String imei = "869154040054509";
 
         IdentityType dniIdentityType = new IdentityType();
         dniIdentityType.name = "dni"; // (tipo de documento de identidad: dni, nie, cif)

@@ -79,6 +79,18 @@ public class IncidenceLibraryManager {
 
                     appearance = (AppConfig) response.get("appearance", AppConfig.class);
 
+                    String valores = response.get("literals");
+
+                    //self    String    "select_beacon_type_iot"
+                    //valores = "{\"select_beacon_type_iot\":\"Help Flash IoT\"}";
+                    if (valores != null) {
+                        //Strip slashes
+                        valores = valores.replace("\\/", "/");
+                        valores = valores.replace("\\n", "\n");
+
+                        Core.saveData(Constants.KEY_LITERALS_VALUES, valores);
+                        Core.updateLiterals(false);
+                    }
 
                     Core.registerDeviceSdk();
 
