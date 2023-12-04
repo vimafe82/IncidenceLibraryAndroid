@@ -26,7 +26,7 @@ public class VXNotificationManager
 
 
             PendingIntent pendingIntent = PendingIntent.getActivity(app, 0 /* Request code */, intent,
-                    PendingIntent.FLAG_ONE_SHOT);
+                    PendingIntent.FLAG_ONE_SHOT | PendingIntent.FLAG_MUTABLE);
 
             NotificationCompat.Builder builder;
 
