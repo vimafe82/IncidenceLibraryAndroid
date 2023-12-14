@@ -21,6 +21,7 @@ public class Constants
     public static final String FUNC_REPOR_INC = "FUNC_REPOR_INC";
     public static final String FUNC_CLOSE_INC = "FUNC_CLOSE_INC";
     public static final String SCREEN_REPOR_INC = "SCREEN_REPOR_INC";
+    public static final String SCREEN_REPOR_INC_SIMPLE = "SCREEN_REPOR_INC_SIMPLE";
     public static final String SCREEN_ERROR = "ERROR";
 
     public static void setBaseUrl(Environment environment)
@@ -57,6 +58,7 @@ public class Constants
 
 
     public static final String KEY_DEVICE_ID = "KEY_DEVICE_ID";
+
     public static final String KEY_USER_TOKEN = "KEY_USER_TOKEN";
     public static final String KEY_USER = "KEY_USER";
     public static final String KEY_USER_DEVICE_NOTIFICATIONS = "KEY_USER_DEVICE_NOTIFICATIONS";
@@ -103,6 +105,7 @@ public class Constants
 
     public static final String WS_RESPONSE_ACTION_INVALID_SESSION = "invalid_session";
 
+    public static final int FAULT = 2;
     public static final int ACCIDENT_TYPE_ONLY_MATERIAL = 12;
     public static final int ACCIDENT_TYPE_WOUNDED = 13;
 

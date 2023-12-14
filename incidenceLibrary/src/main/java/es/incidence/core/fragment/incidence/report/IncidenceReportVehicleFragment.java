@@ -187,12 +187,12 @@ public class IncidenceReportVehicleFragment extends IncidenceReportFragment
 
         if (isAccident)
         {
-            mListener.addFragmentAnimated(AccidentFragment.newInstance(vehicle, openFromNotification));
+            mListener.addFragmentAnimated(AccidentFragment.newInstance(vehicle, user, openFromNotification));
         }
         else
         {
             int parent = 2; //Avería es 2
-            mListener.addFragmentAnimated(FaultFragment.newInstance(parent, vehicle, openFromNotification));
+            mListener.addFragmentAnimated(FaultFragment.newInstance(parent, vehicle, user, openFromNotification));
         }
     }
 

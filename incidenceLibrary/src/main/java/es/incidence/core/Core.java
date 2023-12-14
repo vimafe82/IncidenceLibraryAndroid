@@ -28,6 +28,7 @@ import org.michaelbel.bottomsheet.BottomSheet;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -44,6 +45,7 @@ import es.incidence.core.domain.User;
 import es.incidence.core.domain.Vehicle;
 import es.incidence.core.domain.VehicleType;
 import es.incidence.core.manager.Api;
+import es.incidence.library.IncidenceLibraryManager;
 import es.incidence.library.config.Environment;
 //import es.incidence.core.manager.beacon.BeaconManager;
 //import es.incidence.core.manager.beacon.BeaconService;
@@ -358,7 +360,7 @@ public class Core {
         {
             language = Locale.getDefault().getLanguage();
         }
-
+        language = "es";
         return language;
     }
 
@@ -423,7 +425,9 @@ public class Core {
 
     public static ArrayList<IncidenceType> getIncidencesTypes(int parent) {
         ArrayList<IncidenceType> res = new ArrayList<>();
-        ArrayList<IncidenceType> list = getGeneralDataList("incidencesTypes", IncidenceType.class);
+
+        //ArrayList<IncidenceType> list = getGeneralDataList("incidencesTypes", IncidenceType.class);
+        List<IncidenceType> list = IncidenceLibraryManager.instance.incidencesTypes;
         if (list != null) {
             for (int i = 0; i < list.size(); i++) {
                 IncidenceType it = list.get(i);

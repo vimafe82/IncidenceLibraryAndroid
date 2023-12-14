@@ -9,10 +9,13 @@ import com.e510.incidencelibrary.R;
 import com.e510.location.LocationManager;
 
 import org.greenrobot.eventbus.EventBus;
+import org.json.JSONObject;
 
 import es.incidence.core.Constants;
 import es.incidence.core.Core;
 import es.incidence.core.domain.Incidence;
+import es.incidence.core.domain.IncidenceType;
+import es.incidence.core.domain.User;
 import es.incidence.core.domain.Vehicle;
 import es.incidence.core.entity.event.Event;
 import es.incidence.core.entity.event.EventCode;
@@ -21,11 +24,12 @@ import es.incidence.core.manager.Api;
 import es.incidence.core.manager.IRequestListener;
 import es.incidence.core.manager.IResponse;
 import es.incidence.core.utils.IUtils;
+import es.incidence.library.IncidenceLibraryManager;
 
 
 public class InsuranceCallController
 {
-    public static void reportIncidence(Context context, InsuranceCallDelegate delegate, int incidenceId, Vehicle vehicle, IFragment baseFragment, boolean openFromNotification)
+    public static void reportIncidence(Context context, InsuranceCallDelegate delegate, int incidenceId, Vehicle vehicle, User user, IFragment baseFragment, boolean openFromNotification)
     {
         if (LocationManager.hasPermission(context))
         {
@@ -67,7 +71,7 @@ public class InsuranceCallController
 
                     if (location != null)
                     {
-                        reportLocation(context, delegate, location, incidenceId, vehicle, baseFragment, openFromNotification);
+                        reportLocation(context, delegate, location, incidenceId, vehicle, user, baseFragment, openFromNotification);
                     }
                     else
                     {
@@ -84,7 +88,7 @@ public class InsuranceCallController
         }
     }
 
-    private static void reportLocation(Context context, InsuranceCallDelegate delegate, Location location, int incidenceId, Vehicle vehicle, IFragment baseFragment, boolean openFromNotification)
+    private static void reportLocation(Context context, InsuranceCallDelegate delegate, Location location, int incidenceId, Vehicle vehicle, User user, IFragment baseFragment, boolean openFromNotification)
     {
         /*
         MapBoxManager.searchAddress(location, new SearchCallback() {
@@ -158,6 +162,7 @@ public class InsuranceCallController
         String street = "";
         String city = "";
         String country = "";
+        /*
         Api.reportIncidence(new IRequestListener() {
             @Override
             public void onFinish(IResponse response) {
@@ -184,6 +189,56 @@ public class InsuranceCallController
                 }
             }
         }, vehicle.licensePlate, incidenceId+"", street, city, country, location, openFromNotification);
+        */
+
+        IncidenceType incidenceType = new IncidenceType();
+        //incidenceType.id = idIncidence;
+        //incidenceType.externalId = "B30";
+        incidenceType.externalId = incidenceId+"";
+
+        Incidence incidence = new Incidence();
+        incidence.incidenceType = incidenceType;
+        incidence.street = street;
+        incidence.city = city;
+        incidence.country = country;
+        incidence.latitude = location.getLatitude();
+        incidence.longitude = location.getLongitude();
+        //incidence.externalIncidenceId = externalIncidenceId;
+
+        Api.postIncidenceSdk(new IRequestListener() {
+            @Override
+            public void onFinish(IResponse response) {
+                if (response.isSuccess())
+                {
+                    String ahora = DateUtils.getCurrentDate().getTimeInMillis() + "";
+                    Core.saveData(Constants.KEY_LAST_INCIDENCE_REPORTED_DATE, ahora);
+
+                    //Incidence incidence = (Incidence) response.get("incidence", Incidence.class);
+                    //vehicle.incidences.add(incidence);
+                    //Core.saveVehicle(vehicle);
+
+                    try {
+                        JSONObject jsonObject = response.get();
+                        JSONObject incidenceObject = jsonObject.getJSONObject("incidence");
+                        int id = incidenceObject.getInt("id");
+                        String externalIncidenceTypeId = incidenceObject.getString("externalIncidenceTypeId");
+                        incidence.id = id;
+                        incidence.externalIncidenceId = externalIncidenceTypeId;
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    EventBus.getDefault().post(new Event(EventCode.INCIDENCE_REPORTED));
+
+                    onSuccessReport(context, delegate, incidence, vehicle, baseFragment);
+                }
+                else
+                {
+                    if (delegate != null)
+                        delegate.onBadResponseReport(response);
+                }
+            }
+        }, user, vehicle, incidence);
     }
 
 
@@ -212,7 +267,7 @@ public class InsuranceCallController
                 if (delegate != null)
                     delegate.onSuccessReport(incidence);
             }
-            else if (vehicle != null && vehicle.insurance != null)
+            else if (IncidenceLibraryManager.instance.getInsurance() != null)
             {
                 Log.e("ERROR", "onSuccessReport4");
                 //llamamos a la aseguradora
@@ -258,6 +313,7 @@ public class InsuranceCallController
 
                             bottomSheet.show();
                             */
+                            delegate.onSuccessReport(incidence);
                         }
                         else
                         {
@@ -305,13 +361,13 @@ public class InsuranceCallController
 
             if (inSpain)
             {
-                if (vehicle.insurance.phone != null)
-                    phone = vehicle.insurance.phone;
+                if (IncidenceLibraryManager.instance.getInsurance().phone != null)
+                    phone = IncidenceLibraryManager.instance.getInsurance().phone;
             }
             else
             {
-                if (vehicle.insurance.internationaPhone != null)
-                    phone = vehicle.insurance.internationaPhone;
+                if (IncidenceLibraryManager.instance.getInsurance().internationaPhone != null)
+                    phone = IncidenceLibraryManager.instance.getInsurance().internationaPhone;
             }
 
             if (listener != null)
@@ -334,13 +390,13 @@ public class InsuranceCallController
 
                     if (inSpain)
                     {
-                        if (vehicle.insurance.phone != null)
-                            phone = vehicle.insurance.phone;
+                        if (IncidenceLibraryManager.instance.getInsurance().phone != null)
+                            phone = IncidenceLibraryManager.instance.getInsurance().phone;
                     }
                     else
                     {
-                        if (vehicle.insurance.internationaPhone != null)
-                            phone = vehicle.insurance.internationaPhone;
+                        if (IncidenceLibraryManager.instance.getInsurance().internationaPhone != null)
+                            phone = IncidenceLibraryManager.instance.getInsurance().internationaPhone;
                     }
                     Log.e("ERROR", "locateInsuranceCallPhone4");
                     if (listener != null)
@@ -365,13 +421,18 @@ public class InsuranceCallController
 
                 if (inSpain)
                 {
-                    if (vehicle.insurance.phone != null)
-                        phone = vehicle.insurance.phone;
+                    if (IncidenceLibraryManager.instance.getInsurance().phone != null)
+                        phone = IncidenceLibraryManager.instance.getInsurance().phone;
                 }
                 else
                 {
-                    if (vehicle.insurance.internationaPhone != null)
-                        phone = vehicle.insurance.internationaPhone;
+                    if (IncidenceLibraryManager.instance.getInsurance().internationaPhone != null)
+                        phone = IncidenceLibraryManager.instance.getInsurance().internationaPhone;
+
+                    if ("".equals(phone)) {
+                        if (IncidenceLibraryManager.instance.getInsurance().phone != null)
+                            phone = IncidenceLibraryManager.instance.getInsurance().phone;
+                    }
                 }
                 Log.e("ERROR", "locateInsuranceCallPhone4");
                 if (listener != null)

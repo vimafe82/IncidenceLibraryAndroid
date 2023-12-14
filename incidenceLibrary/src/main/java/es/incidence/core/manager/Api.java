@@ -1,7 +1,6 @@
 package es.incidence.core.manager;
 
 import android.content.Context;
-import android.location.Location;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.util.Log;
@@ -41,7 +40,7 @@ public class Api
     private static final String HEADER_AUTHORIZATION = "Authorization";
     private static final String HEADER_APP = "app";
     private static final String HEADER_LANG = "lang";
-    private static final String HEADER_TOKEN = "token";
+    //private static final String HEADER_TOKEN = "token";
     private static final String HEADER_PLATFORM = "platform";
 
 
@@ -54,11 +53,13 @@ public class Api
     {
         Networking.init(context, false);
 
+        /*
         String token = getToken();
         if (token != null) {
             //Networking.setAuthorization(token);
             Networking.setBasicHeader(HEADER_TOKEN, token);
         }
+        */
         Device d = DeviceUtils.getDevice(context);
         Networking.setBasicHeader(HEADER_AUTHORIZATION, apikey);
         Networking.setBasicHeader(HEADER_APP, d.getPackageName());
@@ -429,7 +430,7 @@ public class Api
                     String token = res.get("token");
                     Core.saveData(Constants.KEY_USER_TOKEN, token);
                     //Networking.setAuthorization(token);
-                    Networking.setBasicHeader(HEADER_TOKEN, token);
+                    //Networking.setBasicHeader(HEADER_TOKEN, token);
 
                     getGeneralData(new IRequestListener() {
                         @Override
@@ -1066,7 +1067,7 @@ public class Api
 
     public static void deleteBeaconSdk(final IRequestListener viewListener, User user, Vehicle vehicle)
     {
-        Networking.setBasicHeader(HEADER_TOKEN, getToken());
+        //Networking.setBasicHeader(HEADER_TOKEN, getToken());
 
         String url = Constants.BASE_URL + "/" + "sdk/beacon";
         log("Request: " + url);
@@ -1216,6 +1217,7 @@ public class Api
         Networking.postDirect(url, params, requestListener);
     }
 
+    /*
     public static void reportIncidence(final IRequestListener viewListener, String licensePlate, String incidenceTypeId, String street, String city, String country, Location location, boolean openFromNotification)
     {
         String url = Constants.BASE_URL + "/" + "incidence";
@@ -1248,6 +1250,7 @@ public class Api
         JSONObjectRequestListener requestListener = getSimpleListener(viewListener);
         Networking.postDirect(url, params, requestListener);
     }
+    */
 
     public static void closeIncidence(final IRequestListener viewListener, int incidenceId)
     {
@@ -1319,7 +1322,7 @@ public class Api
 
     public static void getEcommercesSdk(final IRequestListener viewListener, User user, Vehicle vehicle)
     {
-        Networking.setBasicHeader(HEADER_TOKEN, getToken());
+        //Networking.setBasicHeader(HEADER_TOKEN, getToken());
 
         String url = Constants.BASE_URL + "/sdk/ecommerces";
         log("Request: " + url);
@@ -1426,7 +1429,7 @@ public class Api
 
     public static void getBeaconSdk(final IRequestListener viewListener, User user, Vehicle vehicle)
     {
-        Networking.setBasicHeader(HEADER_TOKEN, getToken());
+        //Networking.setBasicHeader(HEADER_TOKEN, getToken());
 
         String url = Constants.BASE_URL + "/sdk/beacon";
         log("Request: " + url);
@@ -1459,7 +1462,7 @@ public class Api
 
     public static void getBeaconDetailSdk(final IRequestListener viewListener, User user, Vehicle vehicle)
     {
-        Networking.setBasicHeader(HEADER_TOKEN, getToken());
+        //Networking.setBasicHeader(HEADER_TOKEN, getToken());
 
         String url = Constants.BASE_URL + "/sdk/iot_check";
         log("Request: " + url);
@@ -1492,7 +1495,7 @@ public class Api
 
     public static void postIncidenceSdk(final IRequestListener viewListener, User user, Vehicle vehicle, Incidence incidence)
     {
-        Networking.setBasicHeader(HEADER_TOKEN, getToken());
+        //Networking.setBasicHeader(HEADER_TOKEN, getToken());
 
         String url = Constants.BASE_URL + "/sdk/incidence";
         log("Request: " + url);
@@ -1523,18 +1526,19 @@ public class Api
         params.put("street", incidence.street);
         params.put("city", incidence.city);
         params.put("country", incidence.country);
-        params.put("latitude", String.valueOf(incidence.latitude));
-        params.put("longitude", String.valueOf(incidence.longitude));
+        params.put("latitude", incidence.latitude != null ? String.valueOf(incidence.latitude) : "");
+        params.put("longitude", incidence.longitude != null ? String.valueOf(incidence.longitude) : "");
         params.put("fromNotification", "0"); //  (0: reportado manualmente. 1: reportado por baliza)
         params.put("externalIncidenceId", incidence.externalIncidenceId);
 
         JSONObjectRequestListener requestListener = getSimpleListener(viewListener);
         Networking.postDirect(url, params, requestListener);
+        //Networking.postDirect2(url, params, requestListener);
     }
 
     public static void putIncidenceSdk(final IRequestListener viewListener, User user, Vehicle vehicle, Incidence incidence)
     {
-        Networking.setBasicHeader(HEADER_TOKEN, getToken());
+        //Networking.setBasicHeader(HEADER_TOKEN, getToken());
 
         String url = Constants.BASE_URL + "/sdk/incidence";
         log("Request: " + url);

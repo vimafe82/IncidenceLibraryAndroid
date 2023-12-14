@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import com.e510.commons.activity.BaseActivity;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +19,8 @@ import es.incidence.core.Constants;
 import es.incidence.core.Core;
 import es.incidence.core.activity.SimpleMainActivity;
 import es.incidence.core.domain.Incidence;
+import es.incidence.core.domain.IncidenceType;
+import es.incidence.core.domain.Insurance;
 import es.incidence.core.domain.User;
 import es.incidence.core.domain.Vehicle;
 import es.incidence.core.entity.AppConfig;
@@ -40,6 +44,10 @@ public class IncidenceLibraryManager {
     private Boolean validApiKey = null;
     private AppConfig appearance;
     private List<String> screens = new ArrayList<>();
+    private Insurance insurance;
+
+    public List<IncidenceType> incidencesTypes = new ArrayList<>();
+
     private ArrayList<BaseActivity> activities = new ArrayList<>();
     protected int stateCounter = 0;
 
@@ -68,21 +76,14 @@ public class IncidenceLibraryManager {
                     instance.validApiKey = true;
 
                     screens = response.getList("functionalities", String.class);
-                    instance.screens.add(Constants.SCREEN_DEVICE_CREATE);
-                    instance.screens.add(Constants.SCREEN_DEVICE_REVIEW);
-                    instance.screens.add(Constants.SCREEN_ECOMMERCE);
-                    instance.screens.add(Constants.FUNC_CLOSE_INC);
-                    //insurance = (Insurance) response.get("insurance", Insurance.class);
 
-                    //instance.screens.add(Constants.SCREEN_DEVELOPER);
-                    //instance.screens.add(Constants.SCREEN_DEVICE_LIST);
+                    insurance = (Insurance) response.get("insurance", Insurance.class);
 
                     appearance = (AppConfig) response.get("appearance", AppConfig.class);
 
-                    String valores = response.get("literals");
+                    incidencesTypes = response.getList("incidenceTypes", IncidenceType.class);
 
-                    //self    String    "select_beacon_type_iot"
-                    //valores = "{\"select_beacon_type_iot\":\"Help Flash IoT\"}";
+                    String valores = response.get("literals");
                     if (valores != null) {
                         //Strip slashes
                         valores = valores.replace("\\/", "/");
@@ -163,12 +164,26 @@ public class IncidenceLibraryManager {
         }
     }
 
-    public Intent getReportIncViewController(User user, Vehicle vehicle) {
+    public Intent getReportIncViewControllerFlowComplete(User user, Vehicle vehicle) {
         String res = validateScreen(Constants.SCREEN_REPOR_INC);
         if (res == SCREEN_OK) {
             Intent intent = createIntent(Constants.SCREEN_REPOR_INC);
             intent.putExtra("user", user);
             intent.putExtra("vehicle", vehicle);
+            intent.putExtra("flowComplete", true);
+            return intent;
+        } else {
+            return processScreenError(res);
+        }
+    }
+
+    public Intent getReportIncViewControllerFlowSimple(User user, Vehicle vehicle) {
+        String res = validateScreen(Constants.SCREEN_REPOR_INC_SIMPLE);
+        if (res == SCREEN_OK) {
+            Intent intent = createIntent(Constants.SCREEN_REPOR_INC);
+            intent.putExtra("user", user);
+            intent.putExtra("vehicle", vehicle);
+            intent.putExtra("flowComplete", false);
             return intent;
         } else {
             return processScreenError(res);
@@ -263,6 +278,10 @@ public class IncidenceLibraryManager {
         return null;
     }
 
+    public Insurance getInsurance() {
+        return insurance;
+    }
+
     public void deleteBeaconFunc(User user, Vehicle vehicle, IActionListener iActionListener) {
         String res = validateScreen(Constants.FUNC_DEVICE_DELETE);
         if (res == SCREEN_OK) {
@@ -300,7 +319,22 @@ public class IncidenceLibraryManager {
                         IActionResponse actionResponse;
                         if (response.isSuccess())
                         {
-                            actionResponse = new IActionResponse(true);
+                            String message = null;
+                            try {
+                                JSONObject jsonObject = response.get();
+                                JSONObject incidenceObject = jsonObject.getJSONObject("incidence");
+                                int id = incidenceObject.getInt("id");
+                                String externalIncidenceTypeId = incidenceObject.getString("externalIncidenceTypeId");
+                                incidence.id = id;
+                                incidence.externalIncidenceId = externalIncidenceTypeId;
+
+                                message = incidence.externalIncidenceId;
+
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
+                            actionResponse = new IActionResponse(true, message);
                         }
                         else
                         {

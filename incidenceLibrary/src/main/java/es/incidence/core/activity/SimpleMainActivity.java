@@ -76,9 +76,10 @@ public class SimpleMainActivity extends IActivity
 
             User user = b.getParcelable("user");
             Vehicle vehicle = b.getParcelable("vehicle");
+            Boolean flowComplete = b.getBoolean("flowComplete");
 
 
-            showInitialFragment(IncidenceReportFragment.newInstance(vehicle, false));
+            showInitialFragment(IncidenceReportFragment.newInstance(vehicle, user, false, flowComplete));
         }
     }
 }

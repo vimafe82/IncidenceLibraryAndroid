@@ -665,6 +665,7 @@ public class SignUpBeaconFragment extends SignUpFragment {
         fieldImei.setHint(getString(R.string.select_beacon_imei));
         fieldImei.setTitle(getString(R.string.select_beacon_imei));
         fieldImei.setType(IField.TYPE_NUMBER);
+        fieldImei.setText("869154040054509");
 
         RelativeLayout layoutQR = view.findViewById(R.id.layoutRow);
 
