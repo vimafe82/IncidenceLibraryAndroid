@@ -4,14 +4,12 @@ import android.content.Context;
 import android.location.Location;
 import android.util.Log;
 
-import com.e510.commons.utils.DateUtils;
 import com.e510.incidencelibrary.R;
 import com.e510.location.LocationManager;
 
 import org.greenrobot.eventbus.EventBus;
 import org.json.JSONObject;
 
-import es.incidence.core.Constants;
 import es.incidence.core.Core;
 import es.incidence.core.domain.Incidence;
 import es.incidence.core.domain.IncidenceType;
@@ -210,13 +208,6 @@ public class InsuranceCallController
             public void onFinish(IResponse response) {
                 if (response.isSuccess())
                 {
-                    String ahora = DateUtils.getCurrentDate().getTimeInMillis() + "";
-                    Core.saveData(Constants.KEY_LAST_INCIDENCE_REPORTED_DATE, ahora);
-
-                    //Incidence incidence = (Incidence) response.get("incidence", Incidence.class);
-                    //vehicle.incidences.add(incidence);
-                    //Core.saveVehicle(vehicle);
-
                     try {
                         JSONObject jsonObject = response.get();
                         JSONObject incidenceObject = jsonObject.getJSONObject("incidence");

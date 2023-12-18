@@ -26,7 +26,6 @@ import androidx.cardview.widget.CardView;
 import androidx.core.graphics.drawable.DrawableCompat;
 
 import com.e510.commons.activity.BaseActivity;
-import com.e510.commons.utils.DateUtils;
 import com.e510.commons.utils.FontUtils;
 import com.e510.commons.utils.LogUtil;
 import com.e510.commons.utils.Utils;
@@ -492,7 +491,8 @@ public class IncidenceReportFragment extends IFragment implements SpeechManagerL
     }
 
     private void startCountDownTimerRepeatVoice() {
-        String repeatVoice = Core.loadData(Constants.KEY_CONFIG_REPEAT_VOICE);
+        //String repeatVoice = Core.loadData(Constants.KEY_CONFIG_REPEAT_VOICE);
+        String repeatVoice = "15";
         if (repeatVoice != null) {
             if (countDownTimerRepeatVoice != null) {
                 countDownTimerRepeatVoice.cancel();
@@ -652,12 +652,8 @@ public class IncidenceReportFragment extends IFragment implements SpeechManagerL
         if (!flowComplete) {
             reportIncidenceSdk(Constants.FAULT, user.phone);
         } else {
-            if (vehicle != null) {
-                int parent = 2; //Avería es 2
-                mListener.addFragmentAnimated(FaultFragment.newInstance(parent, vehicle, user, openFromNotification));
-            } else {
-                mListener.addFragmentAnimated(IncidenceReportVehicleFragment.newInstance(false, openFromNotification));
-            }
+            int parent = 2; //Avería es 2
+            mListener.addFragmentAnimated(FaultFragment.newInstance(parent, vehicle, user, openFromNotification));
         }
     }
 
@@ -674,14 +670,7 @@ public class IncidenceReportFragment extends IFragment implements SpeechManagerL
         if (!flowComplete) {
             reportIncidenceSdk(Constants.ACCIDENT_TYPE_ONLY_MATERIAL, user.phone);
         } else {
-            if (vehicle != null)
-            {
-                mListener.addFragmentAnimated(AccidentFragment.newInstance(vehicle, user, openFromNotification));
-            }
-            else
-            {
-                mListener.addFragmentAnimated(IncidenceReportVehicleFragment.newInstance(true, openFromNotification));
-            }
+            mListener.addFragmentAnimated(AccidentFragment.newInstance(vehicle, user, openFromNotification));
         }
     }
 
@@ -917,29 +906,6 @@ public class IncidenceReportFragment extends IFragment implements SpeechManagerL
                 hideHud();
                 if (response.isSuccess())
                 {
-                    String ahora = DateUtils.getCurrentDate().getTimeInMillis() + "";
-                    Core.saveData(Constants.KEY_LAST_INCIDENCE_REPORTED_DATE, ahora);
-
-                    EventBus.getDefault().post(new Event(EventCode.INCIDENCE_REPORTED));
-                    /*
-                    boolean call = true;
-                    if (idIncidence.equals(Constants.ACCIDENT_TYPE_ONLY_MATERIAL+""))
-                    {
-                        Incidence incidence = (Incidence) response.get("incidence", Incidence.class);
-                        if (incidence != null && incidence.openApp != null)
-                        {
-                            call = false;
-                            Core.startNewApp(getContext(), incidence.openApp.androidPackage, incidence.openApp.androidDeeplink, incidence.openApp.androidGooglePlayURL);
-                        }
-                    }
-
-                    if (call)
-                    {
-                        Core.callPhone(phone, true);
-                    }
-
-                    mListener.cleanAllBackStackEntries();
-                    */
                     if (incidence != null) {
                         try {
                             JSONObject jsonObject = response.get();

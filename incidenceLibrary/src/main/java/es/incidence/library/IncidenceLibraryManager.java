@@ -67,6 +67,8 @@ public class IncidenceLibraryManager {
     }
 
     private void validateApiKey() {
+        String json = "";
+        processConfigJson(json);
         Api.validateApiKey(new IRequestListener() {
             @Override
             public void onFinish(IResponse response) {
@@ -89,8 +91,7 @@ public class IncidenceLibraryManager {
                         valores = valores.replace("\\/", "/");
                         valores = valores.replace("\\n", "\n");
 
-                        Core.saveData(Constants.KEY_LITERALS_VALUES, valores);
-                        Core.updateLiterals(false);
+                        Core.updateLiterals(valores);
                     }
 
                     Core.registerDeviceSdk();
@@ -102,6 +103,9 @@ public class IncidenceLibraryManager {
         });
     }
 
+    private void processConfigJson(String json) {
+    }
+
     private String validateScreen(String screen) {
         if (validApiKey == null) {
             return CALLIG_VALIDATE_API_KEY;
@@ -111,20 +115,6 @@ public class IncidenceLibraryManager {
             return SCREEN_OK;
         } else {
             return SCREEN_KO;
-        }
-    }
-
-    public boolean haveBeacon() {
-        int numVehicles = Core.getVehicles().size();
-        return numVehicles != 0;
-    }
-
-    public Intent getDeviceListViewController() {
-        String res = validateScreen(Constants.SCREEN_DEVICE_LIST);
-        if (res == SCREEN_OK) {
-            return createIntent(Constants.SCREEN_DEVICE_LIST);
-        } else {
-            return processScreenError(res);
         }
     }
 

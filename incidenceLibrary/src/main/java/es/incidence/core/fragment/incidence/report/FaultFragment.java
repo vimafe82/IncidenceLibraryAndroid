@@ -128,14 +128,6 @@ public class FaultFragment extends IncidenceReportFragment
         View view = inflater.inflate(R.layout.layout_incidence_fault, null);
         LinearLayout layoutRows = view.findViewById(R.id.layoutRows);
 
-        if (parent > 2)
-        {
-            User user = Core.getUser();
-            TextView txtTitle = view.findViewById(R.id.txtTitle);
-            txtTitle.setText(getString(R.string.fault_fallo_title, user.name));
-        }
-
-
         ArrayList<IncidenceType> list = Core.getIncidencesTypes(parent);
         for (int i = 0; i < list.size(); i++)
         {

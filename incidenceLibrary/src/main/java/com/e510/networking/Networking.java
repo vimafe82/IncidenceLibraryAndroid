@@ -8,7 +8,6 @@ import com.androidnetworking.common.ANRequest;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
-import com.androidnetworking.interfaces.StringRequestListener;
 import com.e510.commons.utils.DeviceUtils;
 import com.e510.incidencelibrary.BuildConfig;
 import com.jacksonandroidnetworking.JacksonParserFactory;
@@ -192,31 +191,6 @@ public class Networking
 
         addBasicData(request);
         request.build().getAsJSONObject(jsonObjectRequestListener);
-    }
-
-    public static void postDirect2(String url, HashMap<String, String> params, JSONObjectRequestListener jsonObjectRequestListener)
-    {
-        final ANRequest.PostRequestBuilder request = AndroidNetworking.post(url)
-                .setPriority(Priority.IMMEDIATE)
-                .addApplicationJsonBody(params);
-
-        if (BuildConfig.DEBUG) {
-            Log.e(TAG, "request: " + url);
-            Log.e(TAG, "body: " + params);
-        }
-
-        addBasicData(request);
-        request.build().getAsString(new StringRequestListener() {
-            @Override
-            public void onResponse(String response) {
-                Log.e(TAG, "response: " + response);
-            }
-
-            @Override
-            public void onError(ANError anError) {
-                Log.e(TAG, "response: 1");
-            }
-        });
     }
 
     public static void postDirect(String url, JSONObject params, JSONObjectRequestListener jsonObjectRequestListener)
